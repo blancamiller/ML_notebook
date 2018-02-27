@@ -1,0 +1,907 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{HW2\_STAT760}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \section{HW 2: Apply Linear Regression to Construct a Prostate Cancer
+Model \& Digits Data
+Model}\label{hw-2-apply-linear-regression-to-construct-a-prostate-cancer-model-digits-data-model}
+
+    Blanca Miller STAT 760 02/06/2018
+
+Prostrate Data Info:
+http://web.stanford.edu/\textasciitilde{}hastie/ElemStatLearn/datasets/prostate.info.txt
+Data Set:
+http://web.stanford.edu/\textasciitilde{}hastie/ElemStatLearn/datasets/prostate.data
+
+Given a training set of prostate cancer linear data, estimate the model
+parameters using subset selection.
+
+\subsection{STEPS}\label{steps}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  import data
+\item
+  break data into two groups: train and test
+\item
+  break the training set into two matrices
+
+  \begin{itemize}
+  \tightlist
+  \item
+    X : design matrix (add column of 1s at beginning)
+  \item
+    y : vector of responses
+  \end{itemize}
+\item
+  convert the X and y data frames into numpy arrays
+\item
+  standardize the predictors to have unit variance
+\item
+  estimate weights
+\item
+  calculate RSS for training set for all possible models
+\item
+  Graph k by RSS
+\end{enumerate}
+
+\subsection{FUNCTIONS}\label{functions}
+
+\begin{itemize}
+\tightlist
+\item
+  Fxn evaluates RSS for given X, y, beta
+\item
+  Fxn trains models given list of columns
+\item
+  Fxn generates all possible list of columns
+\item
+  Fxn plot dictionary
+\end{itemize}
+
+    \subsection{Imports}\label{imports}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k+kn}{as} \PY{n+nn}{np}
+        \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k+kn}{as} \PY{n+nn}{pd}
+        \PY{k+kn}{import} \PY{n+nn}{itertools}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib.pyplot} \PY{k+kn}{as} \PY{n+nn}{plt}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn} \PY{k+kn}{import} \PY{n}{datasets}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn} \PY{k+kn}{import} \PY{n}{linear\PYZus{}model}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn.metrics} \PY{k+kn}{import} \PY{n}{r2\PYZus{}score}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn.model\PYZus{}selection} \PY{k+kn}{import} \PY{n}{train\PYZus{}test\PYZus{}split}
+\end{Verbatim}
+
+
+    \subsection{Load Data}\label{load-data}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{n}{data} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{prostate.data}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{delimiter}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}t}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{k}{print}\PY{p}{(}\PY{n}{data}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{:}\PY{l+m+mi}{10}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+   Unnamed: 0    lcavol   lweight  age      lbph  svi       lcp  gleason  \textbackslash{}
+0           1 -0.579818  2.769459   50 -1.386294    0 -1.386294        6   
+1           2 -0.994252  3.319626   58 -1.386294    0 -1.386294        6   
+2           3 -0.510826  2.691243   74 -1.386294    0 -1.386294        7   
+3           4 -1.203973  3.282789   58 -1.386294    0 -1.386294        6   
+4           5  0.751416  3.432373   62 -1.386294    0 -1.386294        6   
+5           6 -1.049822  3.228826   50 -1.386294    0 -1.386294        6   
+6           7  0.737164  3.473518   64  0.615186    0 -1.386294        6   
+7           8  0.693147  3.539509   58  1.536867    0 -1.386294        6   
+8           9 -0.776529  3.539509   47 -1.386294    0 -1.386294        6   
+9          10  0.223144  3.244544   63 -1.386294    0 -1.386294        6   
+
+   pgg45      lpsa train  
+0      0 -0.430783     T  
+1      0 -0.162519     T  
+2     20 -0.162519     T  
+3      0 -0.162519     T  
+4      0  0.371564     T  
+5      0  0.765468     T  
+6      0  0.765468     F  
+7      0  0.854415     T  
+8      0  1.047319     F  
+9      0  1.047319     F  
+
+    \end{Verbatim}
+
+    \subsection{Functions}\label{functions}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{c+c1}{\PYZsh{}evaluates RSS for given X, y, beta}
+        \PY{k}{def} \PY{n+nf}{evaluateRSS}\PY{p}{(}\PY{n}{df}\PY{p}{,} \PY{n}{predictor\PYZus{}subset}\PY{p}{,} \PY{n}{beta}\PY{p}{)}\PY{p}{:}
+            
+            \PY{c+c1}{\PYZsh{} generate predictor df}
+            \PY{n}{predictor\PYZus{}df} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{n}{predictor\PYZus{}subset}\PY{p}{]}
+            
+            \PY{c+c1}{\PYZsh{} generate response df}
+            \PY{n}{response\PYZus{}df} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{lpsa}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+            
+            \PY{c+c1}{\PYZsh{} convert predictor df to ndarray}
+            \PY{n}{predictor\PYZus{}matrix} \PY{o}{=} \PY{n}{predictor\PYZus{}df}\PY{o}{.}\PY{n}{as\PYZus{}matrix}\PY{p}{(}\PY{p}{)}
+            
+            \PY{c+c1}{\PYZsh{} normalize predictors}
+            \PY{n}{predictor\PYZus{}matrix} \PY{o}{=} \PY{p}{(}\PY{n}{predictor\PYZus{}matrix} \PY{o}{\PYZhy{}} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{predictor\PYZus{}matrix}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{n}{np}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{n}{predictor\PYZus{}matrix}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+        
+            \PY{c+c1}{\PYZsh{} adds constant term 1s to predictor matrix}
+            \PY{n}{predictor\PYZus{}matrix} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{c\PYZus{}}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{ones}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{predictor\PYZus{}matrix}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{n}{predictor\PYZus{}matrix}\PY{p}{]}
+            
+            \PY{c+c1}{\PYZsh{} convert response df to ndarray}
+            \PY{n}{response\PYZus{}matrix} \PY{o}{=} \PY{n}{response\PYZus{}df}\PY{o}{.}\PY{n}{as\PYZus{}matrix}\PY{p}{(}\PY{p}{)}
+            
+            \PY{c+c1}{\PYZsh{} compute error}
+            \PY{n}{e} \PY{o}{=} \PY{n}{response\PYZus{}matrix} \PY{o}{\PYZhy{}} \PY{n}{np}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{predictor\PYZus{}matrix}\PY{p}{,} \PY{n}{beta}\PY{p}{)}
+            
+            \PY{c+c1}{\PYZsh{} return error}
+            \PY{k}{return} \PY{n}{np}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{e}\PY{p}{,}\PY{n}{e}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{c+c1}{\PYZsh{} train model given a list of columns}
+        \PY{k}{def} \PY{n+nf}{train}\PY{p}{(}\PY{n}{df}\PY{p}{,} \PY{n}{predictors\PYZus{}subset}\PY{p}{)}\PY{p}{:}
+            
+            \PY{c+c1}{\PYZsh{} generate predictor df}
+            \PY{n}{predictor\PYZus{}df} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{n}{predictors\PYZus{}subset}\PY{p}{]}
+            
+            \PY{c+c1}{\PYZsh{} generate response df}
+            \PY{n}{response\PYZus{}df} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{lpsa}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+            
+            \PY{c+c1}{\PYZsh{} convert predictor df to ndarray}
+            \PY{n}{predictor\PYZus{}matrix} \PY{o}{=} \PY{n}{predictor\PYZus{}df}\PY{o}{.}\PY{n}{as\PYZus{}matrix}\PY{p}{(}\PY{p}{)}
+            
+            \PY{c+c1}{\PYZsh{} normalize predictors}
+            \PY{n}{predictor\PYZus{}matrix} \PY{o}{=} \PY{p}{(}\PY{n}{predictor\PYZus{}matrix} \PY{o}{\PYZhy{}} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{predictor\PYZus{}matrix}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{n}{np}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{n}{predictor\PYZus{}matrix}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+        
+            \PY{c+c1}{\PYZsh{} adds constant term 1s to predictor matrix}
+            \PY{n}{predictor\PYZus{}matrix} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{c\PYZus{}}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{ones}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{predictor\PYZus{}matrix}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{n}{predictor\PYZus{}matrix}\PY{p}{]}
+            
+            \PY{c+c1}{\PYZsh{} convert response df to ndarray}
+            \PY{n}{response\PYZus{}matrix} \PY{o}{=} \PY{n}{response\PYZus{}df}\PY{o}{.}\PY{n}{as\PYZus{}matrix}\PY{p}{(}\PY{p}{)}
+            
+            \PY{c+c1}{\PYZsh{} fit model by pinv:}
+            \PY{c+c1}{\PYZsh{} calculate psuedo\PYZhy{}inverse}
+            \PY{n}{predictor\PYZus{}inverse} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linalg}\PY{o}{.}\PY{n}{pinv}\PY{p}{(}\PY{n}{predictor\PYZus{}matrix}\PY{p}{)}
+            
+            \PY{c+c1}{\PYZsh{} multiply pseudo\PYZhy{}inverse by response matrix}
+            \PY{n}{beta} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{predictor\PYZus{}inverse}\PY{p}{,} \PY{n}{response\PYZus{}matrix}\PY{p}{)}
+            
+            \PY{c+c1}{\PYZsh{} return weights}
+            \PY{k}{return} \PY{n}{beta}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{c+c1}{\PYZsh{} generates all possible list of columns }
+        \PY{k}{def} \PY{n+nf}{generate\PYZus{}columns}\PY{p}{(}\PY{n}{predictors}\PY{p}{)}\PY{p}{:}
+            
+            \PY{c+c1}{\PYZsh{} return all possible subset of predictors \PYZhy{} n choose k}
+            \PY{n}{n} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{predictors}\PY{p}{)}
+            
+            \PY{n}{subsets} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+            
+            \PY{k}{for} \PY{n}{k} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{n}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{:}
+                \PY{n}{x} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{n}{itertools}\PY{o}{.}\PY{n}{combinations}\PY{p}{(}\PY{n}{predictors}\PY{p}{,} \PY{n}{k}\PY{p}{)}\PY{p}{)}
+                \PY{n}{x} \PY{o}{=} \PY{p}{[}\PY{n+nb}{list}\PY{p}{(}\PY{n}{y}\PY{p}{)} \PY{k}{for} \PY{n}{y} \PY{o+ow}{in} \PY{n}{x}\PY{p}{]}
+                \PY{n}{subsets} \PY{o}{+}\PY{o}{=} \PY{n}{x} 
+                
+            \PY{k}{return} \PY{n}{subsets}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{k}{def} \PY{n+nf}{plot}\PY{p}{(}\PY{n}{rss\PYZus{}dict}\PY{p}{)}\PY{p}{:}
+            
+            \PY{c+c1}{\PYZsh{} plots subset by rss}
+            \PY{n}{fig} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{p}{)}
+            \PY{n}{ax} \PY{o}{=} \PY{n}{fig}\PY{o}{.}\PY{n}{add\PYZus{}subplot}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+            \PY{n}{x} \PY{o}{=} \PY{n}{rss\PYZus{}dict}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}
+            \PY{n}{y} \PY{o}{=} \PY{n}{rss\PYZus{}dict}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}
+            \PY{n}{ax}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{x}\PY{p}{,}\PY{n}{y}\PY{p}{)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \subsection{Part A: Prostate Cancer
+Model}\label{part-a-prostate-cancer-model}
+
+    \subsection{Train Prostate Cancer
+Models}\label{train-prostate-cancer-models}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{n}{predictors} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{n}{data}\PY{o}{.}\PY{n}{columns}\PY{o}{.}\PY{n}{values}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{:}\PY{l+m+mi}{9}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{n}{train\PYZus{}data} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{n}{data}\PY{o}{.}\PY{n}{train} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{T}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+        \PY{n}{test\PYZus{}data} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{n}{data}\PY{o}{.}\PY{n}{train} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{F}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{c+c1}{\PYZsh{} generate all possible subsets for each feature/predictor}
+         \PY{n}{predictor\PYZus{}subsets} \PY{o}{=} \PY{n}{generate\PYZus{}columns}\PY{p}{(}\PY{n}{predictors}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} create rss list for models}
+         \PY{n}{rss\PYZus{}values} \PY{o}{=} \PY{p}{\PYZob{}}\PY{n}{k}\PY{p}{:}\PY{p}{[}\PY{p}{]} \PY{k}{for} \PY{n}{k} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{9}\PY{p}{)}\PY{p}{\PYZcb{}}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{c+c1}{\PYZsh{} loop through each possible subset and evaluate model using RSS}
+         \PY{k}{for} \PY{n}{p} \PY{o+ow}{in} \PY{n}{predictor\PYZus{}subsets}\PY{p}{:}
+             \PY{n}{beta} \PY{o}{=} \PY{n}{train}\PY{p}{(}\PY{n}{train\PYZus{}data}\PY{p}{,} \PY{n}{p}\PY{p}{)}
+             \PY{n}{rss} \PY{o}{=} \PY{n}{evaluateRSS}\PY{p}{(}\PY{n}{train\PYZus{}data}\PY{p}{,} \PY{n}{p}\PY{p}{,} \PY{n}{beta}\PY{p}{)}
+             \PY{n}{rss\PYZus{}values}\PY{p}{[}\PY{n+nb}{len}\PY{p}{(}\PY{n}{p}\PY{p}{)}\PY{p}{]}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{rss}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{n}{rss\PYZus{}values}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}12}]:} \{1: [44.52858265645385,
+           73.613540185775335,
+           91.292039020755482,
+           89.624912082459488,
+           66.42240272124414,
+           73.239391316218757,
+           84.991790459378052,
+           76.953236677263263],
+          2: [37.091845632561338,
+           44.495642164067419,
+           39.992304351212333,
+           42.312584301379623,
+           44.467567998531834,
+           44.424078149255507,
+           43.423103787681718,
+           73.028097216638173,
+           73.305459530268365,
+           51.714246792470377,
+           56.768034339535888,
+           63.059181884423303,
+           57.175054366940252,
+           87.197409584605992,
+           64.044028773554828,
+           71.208857866843857,
+           83.827432099917743,
+           75.824639480492948,
+           55.044014020601956,
+           64.137962336059871,
+           78.888337266541214,
+           69.582295055713956,
+           64.088802847943214,
+           63.294934863258128,
+           62.362702781956301,
+           71.749951063174379,
+           70.603509520730938,
+           76.950883206566914],
+          3: [36.817229416000025,
+           36.01516710570592,
+           34.907748856567864,
+           37.089787447798514,
+           36.658492427702328,
+           35.434033239986206,
+           39.802309202295788,
+           42.244606971046714,
+           44.43777353564316,
+           44.415174658518076,
+           43.423016786725107,
+           35.96948006886921,
+           39.970852869380721,
+           39.896830217190455,
+           38.545461464804418,
+           41.263782402004438,
+           42.267033549979999,
+           41.869161533703867,
+           44.301168014954449,
+           42.562229605787095,
+           43.099943647805276,
+           72.84486383586156,
+           51.548299233644642,
+           56.716510713484887,
+           62.80914942486244,
+           57.06730471494464,
+           48.601324135493357,
+           55.074650324588212,
+           62.835263443329488,
+           56.467668934282329,
+           49.909275078140865,
+           48.10158389631021,
+           47.417428583140726,
+           54.630336735488498,
+           53.570614437348148,
+           57.101450639781923,
+           54.774354550932962,
+           63.867968488321203,
+           78.755678004387065,
+           69.525536805544945,
+           62.20614337508249,
+           62.311130030324009,
+           61.19660255290141,
+           70.572267707969075,
+           69.400798784891393,
+           75.774282975691193,
+           52.778138763661516,
+           52.786771795161172,
+           51.530655271190874,
+           63.206685901646033,
+           61.856715635150863,
+           69.54806242205423,
+           62.448644696209527,
+           62.052388626434976,
+           62.173911688862894,
+           70.571758668498077],
+          4: [35.464238001473191,
+           34.712129622912379,
+           36.8142026323154,
+           36.049948120539554,
+           34.815976423396407,
+           32.81499474881555,
+           35.997877720345642,
+           35.667124547041951,
+           34.256787963135594,
+           34.273694721437316,
+           34.606688894416209,
+           34.074151863327096,
+           36.604275512383893,
+           34.746685114030711,
+           35.328554300945314,
+           35.762472367207536,
+           39.778736027296191,
+           39.594656768563958,
+           38.084320496054282,
+           41.203154292512664,
+           42.223637529440829,
+           41.849759194967582,
+           44.298548108223493,
+           42.546423826417332,
+           43.078113811846613,
+           35.357266631281469,
+           35.945795880621787,
+           35.493291436340279,
+           39.893073071050566,
+           38.238086420070047,
+           37.996532935990317,
+           40.999543720120002,
+           39.623312100382449,
+           41.739241310987772,
+           42.070406824624442,
+           48.59828096432507,
+           55.073232862732894,
+           62.482519006110948,
+           56.209941872824999,
+           49.839777901032285,
+           47.995087329407106,
+           47.397248632534811,
+           54.525230142741847,
+           53.525939875523683,
+           56.924276004445218,
+           46.706447196632695,
+           45.651696333928612,
+           44.692117214812356,
+           53.365903236442762,
+           52.153701516246095,
+           56.438289966912919,
+           47.663872765972833,
+           47.325932341640254,
+           47.096972715960064,
+           53.443536473783666,
+           52.663323877186585,
+           52.786647025948696,
+           51.526859567513917,
+           63.156138242952366,
+           61.818447405520246,
+           69.463894400533974,
+           61.432734534698604,
+           60.870167682747606,
+           61.168085348682801,
+           69.391009945230607,
+           51.77603907379109,
+           51.150469708901412,
+           51.49219322086384,
+           61.852731001239853,
+           61.865063596479814],
+          5: [32.28443746269631,
+           35.44384366134495,
+           34.704357000907613,
+           33.18849557681235,
+           34.083344003155155,
+           34.170208530567379,
+           33.644414586126189,
+           35.943402221663973,
+           33.916491474706113,
+           34.802458627723276,
+           32.322836795582703,
+           32.636848329725531,
+           32.069447332331798,
+           35.665535924859874,
+           33.835525242944549,
+           34.03813696596756,
+           33.649790928897154,
+           32.21753338431634,
+           34.057477254089768,
+           34.54863253165265,
+           35.159657902704765,
+           35.672790024714857,
+           35.13063768535882,
+           39.594193686581214,
+           37.694470290319927,
+           37.719335854691501,
+           40.990429981934092,
+           39.622267422641208,
+           41.688483685677724,
+           42.069512088885361,
+           35.207768745361847,
+           33.953537981525031,
+           35.273261065222151,
+           37.571189956527554,
+           39.392187991739952,
+           46.695898087816417,
+           45.284698737418957,
+           44.472357035694529,
+           53.09304326377768,
+           51.950949986443959,
+           56.110164622303316,
+           47.574583175153386,
+           47.30869098440597,
+           47.000748312092156,
+           53.339162003636915,
+           45.062977653634263,
+           44.535176559361354,
+           44.530921666671041,
+           52.104485796334416,
+           47.007278081596525,
+           51.77559675345443,
+           51.14604362963302,
+           51.491974557770831,
+           61.805746825693397,
+           60.842900645348436,
+           51.113054423721309],
+          6: [31.812830659773233,
+           31.805316901775825,
+           31.195594615243188,
+           34.689273250613915,
+           32.6037506583923,
+           33.14254428478425,
+           33.086783141763263,
+           31.572711025970815,
+           33.642782767538563,
+           33.868572946006104,
+           31.914263328598985,
+           30.539778129147358,
+           32.002775193927519,
+           33.53348157772524,
+           32.157943183770286,
+           34.86285919024521,
+           33.442089040181685,
+           35.011567475223572,
+           37.23986333205216,
+           39.386829537710604,
+           33.635367125035629,
+           44.723960117252872,
+           44.324641253846785,
+           44.176795979394399,
+           51.826870621487188,
+           46.917990256961076,
+           44.377460083432084,
+           51.112633574394316],
+          7: [30.958629941880631,
+           29.437300317417076,
+           31.194688345903845,
+           32.519818480573058,
+           31.570706017488391,
+           30.414990170034599,
+           33.26543290315886,
+           44.03662151270499],
+          8: [29.426384459908398]\}
+\end{Verbatim}
+            
+    \subsection{Plot RSS for Subsets}\label{plot-rss-for-subsets}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{c+c1}{\PYZsh{} set x values according to the key and corresponding length of its dictionary}
+         \PY{n}{x} \PY{o}{=} \PY{p}{[}\PY{n}{j} \PY{k}{for} \PY{n}{j} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{9}\PY{p}{)} \PY{k}{for} \PY{n}{k} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{rss\PYZus{}values}\PY{p}{[}\PY{n}{j}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{p}{]}
+         
+         \PY{c+c1}{\PYZsh{} set y values to k subsets(1\PYZhy{}8)}
+         \PY{n}{y} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{k}{for} \PY{n}{k} \PY{o+ow}{in} \PY{n}{rss\PYZus{}values}\PY{o}{.}\PY{n}{keys}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+             \PY{n}{y} \PY{o}{+}\PY{o}{=} \PY{n}{rss\PYZus{}values}\PY{p}{[}\PY{n}{k}\PY{p}{]}
+         
+         \PY{c+c1}{\PYZsh{} graph scatter plot}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{x}\PY{p}{,}\PY{n}{y}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{All Possible Subset Models for Prostate Cancer Data}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Subset Size k}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Residual Sum\PYZhy{}Of\PYZhy{}Squares}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}13}]:} <matplotlib.text.Text at 0x7f55768cc850>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_20_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsection{Part B: Digits Data Model}\label{part-b-digits-data-model}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{c+c1}{\PYZsh{} Load the data set}
+         \PY{n}{digits} \PY{o}{=} \PY{n}{datasets}\PY{o}{.}\PY{n}{load\PYZus{}digits}\PY{p}{(}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Training data set}
+         \PY{n}{X\PYZus{}digits} \PY{o}{=} \PY{n}{digits}\PY{o}{.}\PY{n}{data}
+         
+         \PY{c+c1}{\PYZsh{} Target data set }
+         \PY{n}{y\PYZus{}digits} \PY{o}{=} \PY{n}{digits}\PY{o}{.}\PY{n}{target}
+         
+         \PY{c+c1}{\PYZsh{} Allocate 2/3 of the data set as training \PYZam{} 1/3 as testing}
+         \PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{X\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}test} \PY{o}{=} \PY{n}{train\PYZus{}test\PYZus{}split}\PY{p}{(}\PY{n}{X\PYZus{}digits}\PY{p}{,} \PY{n}{y\PYZus{}digits}\PY{p}{,} \PY{n}{test\PYZus{}size}\PY{o}{=}\PY{l+m+mf}{0.33}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Print size of data subsets to verify splitting}
+         \PY{k}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Digits data set: \PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{digits}\PY{o}{.}\PY{n}{data}\PY{o}{.}\PY{n}{shape}\PY{p}{)}\PY{p}{)}
+         \PY{k}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{X\PYZus{}train data set: \PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{o}{.}\PY{n}{shape}\PY{p}{)}\PY{p}{)}
+         \PY{k}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{y\PYZus{}train target array: \PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{y\PYZus{}train}\PY{o}{.}\PY{n}{shape}\PY{p}{)}\PY{p}{)}
+         \PY{k}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{X\PYZus{}test data set: \PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{o}{.}\PY{n}{shape}\PY{p}{)}\PY{p}{)}
+         \PY{k}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{y\PYZus{}test target array: \PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{y\PYZus{}test}\PY{o}{.}\PY{n}{shape}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Digits data set: (1797, 64)
+X\_train data set: (1203, 64)
+y\_train target array: (1203,)
+X\_test data set: (594, 64)
+y\_test target array: (594,)
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{c+c1}{\PYZsh{} Create a linear regression object}
+         \PY{n}{regr} \PY{o}{=} \PY{n}{linear\PYZus{}model}\PY{o}{.}\PY{n}{LinearRegression}\PY{p}{(}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Fit the linear model to the training data set}
+         \PY{n}{regr}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Predict using the test set}
+         \PY{n}{y\PYZus{}pred} \PY{o}{=} \PY{n}{regr}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{)}
+         
+         \PY{k}{print}\PY{p}{(}\PY{n}{regr}\PY{o}{.}\PY{n}{coef\PYZus{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[ -1.94280340e-15  -2.89979657e-02   1.24287230e-03  -1.06973050e-02
+   4.38643781e-02  -1.65447148e-02  -2.00096106e-02   2.34955480e-02
+   8.74096945e-01  -3.12712915e-02   9.63255032e-02   4.05234971e-02
+  -5.95940201e-02  -6.59114040e-02   1.05233510e-01   1.68547641e-01
+   6.10949342e-02   1.89737977e-02   7.85374735e-02  -4.80103630e-02
+  -7.47479284e-02   3.95504178e-02  -5.61130058e-02  -3.46495044e-01
+  -3.63275601e+00  -1.58983369e-01   4.02572888e-02   9.12299099e-02
+   9.10485724e-02   7.73169368e-02  -1.57133999e-04  -1.32269712e+00
+   1.97966643e-14  -1.56139892e-01  -1.17031752e-02   1.32457386e-01
+  -5.83320267e-02   4.98255222e-02  -1.70400013e-02   1.70002901e-14
+   7.61362376e-02   9.69295065e-02  -2.49461828e-02   7.47353688e-03
+   1.30010714e-01   3.40584188e-02   3.67188004e-02  -1.55143391e-02
+   8.18111982e-01   4.46771349e-02  -8.21372475e-03  -7.25152141e-02
+  -2.08298482e-01  -1.86824314e-02   7.50105484e-02  -8.94214173e-02
+  -2.20255711e+00  -4.52896702e-02  -1.92508549e-03  -6.65000804e-02
+   4.30295237e-03  -9.30775110e-02   3.11597035e-02  -1.01808602e-01]
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{c+c1}{\PYZsh{} Residual sum of squares}
+         \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{(}\PY{n}{regr}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{y\PYZus{}test}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}16}]:} 2094.8172659088614
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{c+c1}{\PYZsh{} Explained variance score: 1 is a perfect prediction \PYZam{} 0 is no linear relationship between X and y}
+         \PY{n}{reg\PYZus{}score} \PY{o}{=} \PY{n}{regr}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}test}\PY{p}{)}
+         \PY{n}{reg\PYZus{}score}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}17}]:} 0.55782504133663546
+\end{Verbatim}
+            
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
