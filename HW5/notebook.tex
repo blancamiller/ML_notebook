@@ -1,0 +1,784 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{HW5}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \section{HW5: Learning Classifier Weights using Perceptron Learning and
+Gradient
+Descent}\label{hw5-learning-classifier-weights-using-perceptron-learning-and-gradient-descent}
+
+    Blanca Miller STAT 760 03.08.2018 
+
+    \textbf{Objective:} - Generate a data set composed of classified points
+where each data vector is made up of a position and classification. -
+part a) Find a separating hyperplane using perceptron learning algorithm
+using a step function. Measure the run time for 10, 50 \& 100 points. -
+part b) Find a separating hyperplane using gradient descent using a
+sigmoid function. Measure the run time for 10, 50, \& 100 points. - Does
+the run time increase linearly? Explain.
+
+Weights map inputs to outputs, thus classifying a set of inputted data.
+The perceptron learning algorithm (PLA) always finds a hyperplane in a
+fininte amount of iterations, if a data set is linearly separable.
+Greadient descent finds the minimun of a function the (non-linear
+separability)
+
+with a step function using the thresholded outputs.
+
+    \textbf{Given:} - input vector: xi - target/label: y - learning rate: η
+- weight: wi - predicted label: y\_hat
+
+\textbf{Perceptron Learning Algorithm:} - output calculation: y\_hat = ∑
+wi * xi , where y\_hat\textgreater{}=0 or y\_hat\textless{}0 - weight
+calculation: wi = wi + Δwi - weight change: Δwi = η(y - y\_hat) * xi
+
+\textbf{Gradient Descent:} - Learning Rate: Used to limit the amount
+each weight is corrected for each update - Epochs: The number of times
+to run through the training data while updating the weight
+
+    \subsubsection{Import Libraries}\label{import-libraries}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{k+kn}{import} \PY{n+nn}{sklearn}
+        \PY{k+kn}{import} \PY{n+nn}{random}
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k+kn}{as} \PY{n+nn}{np}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib.pyplot} \PY{k+kn}{as} \PY{n+nn}{plt}
+        
+        \PY{k+kn}{from} \PY{n+nn}{numpy} \PY{k+kn}{import} \PY{n}{dot}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn} \PY{k+kn}{import} \PY{n}{linear\PYZus{}model}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn.datasets} \PY{k+kn}{import} \PY{n}{make\PYZus{}classification}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn.datasets.samples\PYZus{}generator} \PY{k+kn}{import} \PY{n}{make\PYZus{}blobs}
+\end{Verbatim}
+
+
+    \paragraph{Randomly Generate \& Plot a data set \& labels where n=10,
+50, \&
+100}\label{randomly-generate-plot-a-data-set-labels-where-n10-50-100}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{8}\PY{p}{,}\PY{l+m+mi}{8}\PY{p}{)}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{subplots\PYZus{}adjust}\PY{p}{(}\PY{n}{bottom}\PY{o}{=}\PY{o}{.}\PY{l+m+mo}{05}\PY{p}{,} \PY{n}{top}\PY{o}{=}\PY{o}{.}\PY{l+m+mi}{9}\PY{p}{,} \PY{n}{left}\PY{o}{=}\PY{o}{.}\PY{l+m+mo}{05}\PY{p}{,} \PY{n}{right}\PY{o}{=}\PY{o}{.}\PY{l+m+mi}{95}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{322}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Two Randomly Generated Classes}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{X\PYZus{}10}\PY{p}{,} \PY{n}{y\PYZus{}10} \PY{o}{=} \PY{n}{make\PYZus{}blobs}\PY{p}{(}\PY{n}{n\PYZus{}samples}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{,} \PY{n}{centers}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{n\PYZus{}features}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{,}\PY{n}{random\PYZus{}state}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{X\PYZus{}10}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{X\PYZus{}10}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{marker}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{o}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{c}\PY{o}{=}\PY{n}{y\PYZus{}10}\PY{p}{,} \PY{n}{s}\PY{o}{=}\PY{l+m+mi}{25}\PY{p}{,} \PY{n}{edgecolor}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{k}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_7_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{8}\PY{p}{,}\PY{l+m+mi}{8}\PY{p}{)}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{subplots\PYZus{}adjust}\PY{p}{(}\PY{n}{bottom}\PY{o}{=}\PY{o}{.}\PY{l+m+mo}{05}\PY{p}{,} \PY{n}{top}\PY{o}{=}\PY{o}{.}\PY{l+m+mi}{9}\PY{p}{,} \PY{n}{left}\PY{o}{=}\PY{o}{.}\PY{l+m+mo}{05}\PY{p}{,} \PY{n}{right}\PY{o}{=}\PY{o}{.}\PY{l+m+mi}{95}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{322}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Two Randomly Generated Classes}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{X\PYZus{}50}\PY{p}{,} \PY{n}{y\PYZus{}50} \PY{o}{=} \PY{n}{make\PYZus{}blobs}\PY{p}{(}\PY{n}{n\PYZus{}samples}\PY{o}{=}\PY{l+m+mi}{50}\PY{p}{,} \PY{n}{centers}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{n\PYZus{}features}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{,}\PY{n}{random\PYZus{}state}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{X\PYZus{}50}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{X\PYZus{}50}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{marker}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{o}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{c}\PY{o}{=}\PY{n}{y\PYZus{}50}\PY{p}{,} \PY{n}{s}\PY{o}{=}\PY{l+m+mi}{25}\PY{p}{,} \PY{n}{edgecolor}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{k}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_8_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{8}\PY{p}{,}\PY{l+m+mi}{8}\PY{p}{)}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{subplots\PYZus{}adjust}\PY{p}{(}\PY{n}{bottom}\PY{o}{=}\PY{o}{.}\PY{l+m+mo}{05}\PY{p}{,} \PY{n}{top}\PY{o}{=}\PY{o}{.}\PY{l+m+mi}{9}\PY{p}{,} \PY{n}{left}\PY{o}{=}\PY{o}{.}\PY{l+m+mo}{05}\PY{p}{,} \PY{n}{right}\PY{o}{=}\PY{o}{.}\PY{l+m+mi}{95}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{322}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Two Randomly Generated Classes}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{X\PYZus{}100}\PY{p}{,} \PY{n}{y\PYZus{}100} \PY{o}{=} \PY{n}{make\PYZus{}blobs}\PY{p}{(}\PY{n}{n\PYZus{}samples}\PY{o}{=}\PY{l+m+mi}{100}\PY{p}{,} \PY{n}{centers}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{n\PYZus{}features}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{,}\PY{n}{random\PYZus{}state}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{X\PYZus{}100}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{X\PYZus{}100}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{marker}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{o}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{c}\PY{o}{=}\PY{n}{y\PYZus{}100}\PY{p}{,} \PY{n}{s}\PY{o}{=}\PY{l+m+mi}{25}\PY{p}{,} \PY{n}{edgecolor}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{k}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_9_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{c+c1}{\PYZsh{}print(X\PYZus{}10)}
+        \PY{c+c1}{\PYZsh{}print(y\PYZus{}10)}
+        \PY{c+c1}{\PYZsh{}print(X\PYZus{}50)}
+        \PY{c+c1}{\PYZsh{}print(y\PYZus{}50)}
+        \PY{c+c1}{\PYZsh{}print(X\PYZus{}100)}
+        \PY{c+c1}{\PYZsh{}print(y\PYZus{}100)}
+\end{Verbatim}
+
+
+    \subsection{PART A}\label{part-a}
+
+    \subsubsection{Perceptron Learning
+Algorithm}\label{perceptron-learning-algorithm}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{c+c1}{\PYZsh{} set the step function}
+        \PY{n}{step} \PY{o}{=} \PY{k}{lambda} \PY{n}{x}\PY{p}{:} \PY{l+m+mi}{0} \PY{k}{if} \PY{n}{x} \PY{o}{\PYZlt{}} \PY{l+m+mi}{0} \PY{k}{else} \PY{l+m+mi}{1}
+        
+        \PY{c+c1}{\PYZsh{} choose a number of random weights between 0 \PYZam{} 1}
+        \PY{n}{w} \PY{o}{=}  \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{rand}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} initialie an error list, a learning rate, and a variable for the number of samples }
+        \PY{n}{errors} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+        \PY{n}{eta} \PY{o}{=} \PY{l+m+mf}{0.2}
+        \PY{n}{n\PYZus{}10} \PY{o}{=} \PY{l+m+mi}{10}
+        \PY{n}{n\PYZus{}50} \PY{o}{=} \PY{l+m+mi}{50}
+        \PY{n}{n\PYZus{}100} \PY{o}{=} \PY{l+m+mi}{100}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{c+c1}{\PYZsh{}try to reduce the error magnitude to zero }
+        \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{n\PYZus{}10}\PY{p}{)}\PY{p}{:}
+            
+            \PY{c+c1}{\PYZsh{} choose a random input from the data set}
+            \PY{n}{rand} \PY{o}{=} \PY{n}{random}\PY{o}{.}\PY{n}{randrange}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+            \PY{n}{x} \PY{o}{=} \PY{n}{X\PYZus{}10}\PY{p}{[}\PY{n}{rand}\PY{p}{]}
+            \PY{n}{label} \PY{o}{=} \PY{n}{y\PYZus{}10}\PY{p}{[}\PY{n}{rand}\PY{p}{]}
+            
+            \PY{c+c1}{\PYZsh{} compute the dot product of the weight and input vector}
+            \PY{n}{result} \PY{o}{=} \PY{n}{dot}\PY{p}{(}\PY{n}{w}\PY{p}{,} \PY{n}{x}\PY{p}{)}
+            
+            \PY{c+c1}{\PYZsh{} compare the expected label to the predicted label}
+            \PY{n}{error} \PY{o}{=} \PY{n}{label} \PY{o}{\PYZhy{}} \PY{n}{step}\PY{p}{(}\PY{n}{result}\PY{p}{)}
+            
+            \PY{c+c1}{\PYZsh{} store errors to list to plot afterwards}
+            \PY{n}{errors}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{error}\PY{p}{)}
+            \PY{n}{w} \PY{o}{+}\PY{o}{=} \PY{n}{eta} \PY{o}{*} \PY{n}{error} \PY{o}{*} \PY{n}{x}
+        
+            \PY{k}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{x: \PYZob{}\PYZcb{} , y: \PYZob{}\PYZcb{} , result: \PYZob{}\PYZcb{} , error: \PYZob{}\PYZcb{} , weight: \PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{label}\PY{p}{,} \PY{n}{result}\PY{p}{,} \PY{n}{error}\PY{p}{,} \PY{n}{w}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+x: [1.9263585  4.15243012] , y: 0 , result: 1.84015867119 , error: -1 , weight: [ 0.22475213 -0.67033063]
+x: [1.9263585  4.15243012] , y: 0 , result: -2.35054791878 , error: 0 , weight: [ 0.22475213 -0.67033063]
+x: [-0.49772229  1.55128226] , y: 1 , result: -1.15173615142 , error: 1 , weight: [ 0.12520767 -0.36007418]
+x: [0.87305123 4.71438583] , y: 0 , result: -1.58821588651 , error: 0 , weight: [ 0.12520767 -0.36007418]
+x: [2.84382807 3.32650945] , y: 0 , result: -0.841721070163 , error: 0 , weight: [ 0.12520767 -0.36007418]
+x: [1.9263585  4.15243012] , y: 0 , result: -1.25398800077 , error: 0 , weight: [ 0.12520767 -0.36007418]
+x: [1.7373078  4.42546234] , y: 0 , result: -1.37597045042 , error: 0 , weight: [ 0.12520767 -0.36007418]
+x: [2.36833522 0.04356792] , y: 1 , result: 0.280846045825 , error: 0 , weight: [ 0.12520767 -0.36007418]
+x: [2.84382807 3.32650945] , y: 0 , result: -0.841721070163 , error: 0 , weight: [ 0.12520767 -0.36007418]
+x: [3.54934659 0.6925054 ] , y: 1 , result: 0.195052097896 , error: 0 , weight: [ 0.12520767 -0.36007418]
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{k+kn}{from} \PY{n+nn}{pylab} \PY{k+kn}{import} \PY{n}{plot}\PY{p}{,} \PY{n}{ylim}
+        \PY{n}{ylim}\PY{p}{(}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+        \PY{n}{plot}\PY{p}{(}\PY{n}{errors}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_15_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{c+c1}{\PYZsh{}try to reduce the error magnitude to zero }
+        \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{n\PYZus{}50}\PY{p}{)}\PY{p}{:}
+            
+            \PY{c+c1}{\PYZsh{} choose a random input from the data set}
+            \PY{n}{rand} \PY{o}{=} \PY{n}{random}\PY{o}{.}\PY{n}{randrange}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{49}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+            \PY{n}{x} \PY{o}{=} \PY{n}{X\PYZus{}50}\PY{p}{[}\PY{n}{rand}\PY{p}{]}
+            \PY{n}{label} \PY{o}{=} \PY{n}{y\PYZus{}50}\PY{p}{[}\PY{n}{rand}\PY{p}{]}
+            
+            \PY{c+c1}{\PYZsh{} compute the dot product of the weight and input vector}
+            \PY{n}{result} \PY{o}{=} \PY{n}{dot}\PY{p}{(}\PY{n}{w}\PY{p}{,} \PY{n}{x}\PY{p}{)}
+            
+            \PY{c+c1}{\PYZsh{} compare the expected label to the predicted label}
+            \PY{n}{error} \PY{o}{=} \PY{n}{label} \PY{o}{\PYZhy{}} \PY{n}{step}\PY{p}{(}\PY{n}{result}\PY{p}{)}
+            
+            \PY{c+c1}{\PYZsh{} store errors to list to plot afterwards}
+            \PY{n}{errors}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{error}\PY{p}{)}
+            \PY{n}{w} \PY{o}{+}\PY{o}{=} \PY{n}{eta} \PY{o}{*} \PY{n}{error} \PY{o}{*} \PY{n}{x}
+        
+            \PY{k}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{x: \PYZob{}\PYZcb{} , y: \PYZob{}\PYZcb{} , result: \PYZob{}\PYZcb{} , error: \PYZob{}\PYZcb{} , weight: \PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{label}\PY{p}{,} \PY{n}{result}\PY{p}{,} \PY{n}{error}\PY{p}{,} \PY{n}{w}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+x: [0.89011768 1.79849015] , y: 1 , result: -0.53614029965 , error: 1 , weight: [ 0.3032312  -0.00037615]
+x: [1.14796916 0.94960906] , y: 1 , result: 0.347742876637 , error: 0 , weight: [ 0.3032312  -0.00037615]
+x: [ 3.19466821 -0.33716216] , y: 1 , result: 0.968849907553 , error: 0 , weight: [ 0.3032312  -0.00037615]
+x: [1.18447037 0.318814  ] , y: 1 , result: 0.359048455657 , error: 0 , weight: [ 0.3032312  -0.00037615]
+x: [0.46546494 3.12315514] , y: 0 , result: 0.139968729156 , error: -1 , weight: [ 0.21013822 -0.62500718]
+x: [0.4666179  3.86571303] , y: 0 , result: -2.31804412772 , error: 0 , weight: [ 0.21013822 -0.62500718]
+x: [3.54351972 2.79355284] , y: 1 , result: -1.00136165874 , error: 1 , weight: [ 0.91884216 -0.06629661]
+x: [3.54351972 2.79355284] , y: 1 , result: 3.07073222517 , error: 0 , weight: [ 0.91884216 -0.06629661]
+x: [2.20656076 5.50616718] , y: 0 , result: 1.66244084182 , error: -1 , weight: [ 0.47753001 -1.16753004]
+x: [0.4666179  3.86571303] , y: 0 , result: -4.29051205034 , error: 0 , weight: [ 0.47753001 -1.16753004]
+x: [2.18217961 1.29965302] , y: 1 , result: -0.475327705641 , error: 1 , weight: [ 0.91396593 -0.90759944]
+x: [2.50904929 5.7731461 ] , y: 0 , result: -2.94651859001 , error: 0 , weight: [ 0.91396593 -0.90759944]
+x: [2.50904929 5.7731461 ] , y: 0 , result: -2.94651859001 , error: 0 , weight: [ 0.91396593 -0.90759944]
+x: [1.1312175  4.68194985] , y: 0 , result: -3.21544079672 , error: 0 , weight: [ 0.91396593 -0.90759944]
+x: [1.0220286  4.11660348] , y: 0 , result: -2.80212769098 , error: 0 , weight: [ 0.91396593 -0.90759944]
+x: [1.74371499 0.953829  ] , y: 1 , result: 0.72800142356 , error: 0 , weight: [ 0.91396593 -0.90759944]
+x: [2.06576754 2.68353415] , y: 1 , result: -0.547532940854 , error: 1 , weight: [ 1.32711944 -0.37089261]
+x: [2.06576754 2.68353415] , y: 1 , result: 1.74621727776 , error: 0 , weight: [ 1.32711944 -0.37089261]
+x: [2.45760916 0.21285357] , y: 1 , result: 3.18259507487 , error: 0 , weight: [ 1.32711944 -0.37089261]
+x: [2.50904929 5.7731461 ] , y: 0 , result: 1.18859087365 , error: -1 , weight: [ 0.82530958 -1.52552183]
+x: [1.9263585  4.15243012] , y: 0 , result: -4.74478066467 , error: 0 , weight: [ 0.82530958 -1.52552183]
+x: [-1.57671974  4.95740592] , y: 0 , result: -8.86391284676 , error: 0 , weight: [ 0.82530958 -1.52552183]
+x: [1.28933778 3.44969159] , y: 0 , result: -4.19847699548 , error: 0 , weight: [ 0.82530958 -1.52552183]
+x: [1.12031365 5.75806083] , y: 0 , result: -7.85944190092 , error: 0 , weight: [ 0.82530958 -1.52552183]
+x: [ 2.52092996 -0.63858003] , y: 1 , result: 3.05471541438 , error: 0 , weight: [ 0.82530958 -1.52552183]
+x: [1.74371499 0.953829  ] , y: 1 , result: -0.015982278526 , error: 1 , weight: [ 1.17405258 -1.33475603]
+x: [0.08080352 4.69068983] , y: 0 , result: -6.16605893829 , error: 0 , weight: [ 1.17405258 -1.33475603]
+x: [0.4666179  3.86571303] , y: 0 , result: -4.61194981643 , error: 0 , weight: [ 1.17405258 -1.33475603]
+x: [1.38280707 0.5381105 ] , y: 1 , result: 0.905241977404 , error: 0 , weight: [ 1.17405258 -1.33475603]
+x: [2.02708529 1.32599553] , y: 1 , result: 0.610024185995 , error: 0 , weight: [ 1.17405258 -1.33475603]
+x: [1.14796916 0.94960906] , y: 1 , result: 0.0802797366227 , error: 0 , weight: [ 1.17405258 -1.33475603]
+x: [2.18217961 1.29965302] , y: 1 , result: 0.827273893411 , error: 0 , weight: [ 1.17405258 -1.33475603]
+x: [0.4666179  3.86571303] , y: 0 , result: -4.61194981643 , error: 0 , weight: [ 1.17405258 -1.33475603]
+x: [1.42094543 0.53492249] , y: 1 , result: 0.954273618465 , error: 0 , weight: [ 1.17405258 -1.33475603]
+x: [0.89011768 1.79849015] , y: 1 , result: -1.35550060655 , error: 1 , weight: [ 1.35207611 -0.975058  ]
+x: [2.2635425 1.8743027] , y: 1 , result: 1.23292791035 , error: 0 , weight: [ 1.35207611 -0.975058  ]
+x: [2.23269366 0.49588272] , y: 1 , result: 2.53525735505 , error: 0 , weight: [ 1.35207611 -0.975058  ]
+x: [1.42094543 0.53492249] , y: 1 , result: 1.39964591511 , error: 0 , weight: [ 1.35207611 -0.975058  ]
+x: [1.0220286  4.11660348] , y: 0 , result: -2.63206669306 , error: 0 , weight: [ 1.35207611 -0.975058  ]
+x: [-0.73000011  6.25456272] , y: 0 , result: -7.08557711984 , error: 0 , weight: [ 1.35207611 -0.975058  ]
+x: [1.12031365 5.75806083] , y: 0 , result: -4.09969394348 , error: 0 , weight: [ 1.35207611 -0.975058  ]
+x: [2.47034915 4.09862906] , y: 0 , result: -0.656300969337 , error: 0 , weight: [ 1.35207611 -0.975058  ]
+x: [-0.07228289  2.88376939] , y: 0 , result: -2.90957437212 , error: 0 , weight: [ 1.35207611 -0.975058  ]
+x: [3.23404709 0.71773882] , y: 1 , result: 3.6728408421 , error: 0 , weight: [ 1.35207611 -0.975058  ]
+x: [ 1.24212124 -0.82861894] , y: 1 , result: 2.48739398443 , error: 0 , weight: [ 1.35207611 -0.975058  ]
+x: [3.2460247  2.84942165] , y: 0 , result: 1.61052109142 , error: -1 , weight: [ 0.70287117 -1.54494233]
+x: [0.08848433 2.32299086] , y: 0 , result: -3.52669382145 , error: 0 , weight: [ 0.70287117 -1.54494233]
+x: [ 3.19466821 -0.33716216] , y: 1 , result: 2.76633628151 , error: 0 , weight: [ 0.70287117 -1.54494233]
+x: [2.12178474 1.20013556] , y: 1 , result: -0.362798891743 , error: 1 , weight: [ 1.12722812 -1.30491522]
+x: [2.06576754 2.68353415] , y: 1 , result: -1.17319328637 , error: 1 , weight: [ 1.54038163 -0.76820839]
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{k+kn}{from} \PY{n+nn}{pylab} \PY{k+kn}{import} \PY{n}{plot}\PY{p}{,} \PY{n}{ylim}
+         \PY{n}{ylim}\PY{p}{(}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+         \PY{n}{plot}\PY{p}{(}\PY{n}{errors}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_17_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{c+c1}{\PYZsh{}try to reduce the error magnitude to zero }
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{n\PYZus{}100}\PY{p}{)}\PY{p}{:}
+             
+             \PY{c+c1}{\PYZsh{} choose a random input from the data set}
+             \PY{n}{rand} \PY{o}{=} \PY{n}{random}\PY{o}{.}\PY{n}{randrange}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{99}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+             \PY{n}{x} \PY{o}{=} \PY{n}{X\PYZus{}100}\PY{p}{[}\PY{n}{rand}\PY{p}{]}
+             \PY{n}{label} \PY{o}{=} \PY{n}{y\PYZus{}100}\PY{p}{[}\PY{n}{rand}\PY{p}{]}
+             
+             \PY{c+c1}{\PYZsh{} compute the dot product of the weight and input vector}
+             \PY{n}{result} \PY{o}{=} \PY{n}{dot}\PY{p}{(}\PY{n}{w}\PY{p}{,} \PY{n}{x}\PY{p}{)}
+             
+             \PY{c+c1}{\PYZsh{} compare the expected label to the predicted label}
+             \PY{n}{error} \PY{o}{=} \PY{n}{label} \PY{o}{\PYZhy{}} \PY{n}{step}\PY{p}{(}\PY{n}{result}\PY{p}{)}
+             
+             \PY{c+c1}{\PYZsh{} store errors to list to plot afterwards}
+             \PY{n}{errors}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{error}\PY{p}{)}
+             \PY{n}{w} \PY{o}{+}\PY{o}{=} \PY{n}{eta} \PY{o}{*} \PY{n}{error} \PY{o}{*} \PY{n}{x}
+         
+             \PY{k}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{x: \PYZob{}\PYZcb{} , y: \PYZob{}\PYZcb{} , result: \PYZob{}\PYZcb{} , error: \PYZob{}\PYZcb{} , weight: \PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{label}\PY{p}{,} \PY{n}{result}\PY{p}{,} \PY{n}{error}\PY{p}{,} \PY{n}{w}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+x: [1.02102468 1.57925818] , y: 1 , result: 0.359568283899 , error: 0 , weight: [ 1.54038163 -0.76820839]
+x: [-0.07228289  2.88376939] , y: 0 , result: -2.32667905971 , error: 0 , weight: [ 1.54038163 -0.76820839]
+x: [1.28933778 3.44969159] , y: 0 , result: -0.664009776083 , error: 0 , weight: [ 1.54038163 -0.76820839]
+x: [1.25185786 0.20811388] , y: 1 , result: 1.76846401701 , error: 0 , weight: [ 1.54038163 -0.76820839]
+x: [3.2460247  2.84942165] , y: 0 , result: 2.81116721277 , error: -1 , weight: [ 0.89117669 -1.33809272]
+x: [1.18454506 5.28042636] , y: 0 , result: -6.01006111644 , error: 0 , weight: [ 0.89117669 -1.33809272]
+x: [ 1.05505217 -0.64710744] , y: 1 , result: 1.80612765174 , error: 0 , weight: [ 0.89117669 -1.33809272]
+x: [ 1.05505217 -0.64710744] , y: 1 , result: 1.80612765174 , error: 0 , weight: [ 0.89117669 -1.33809272]
+x: [1.33263648 5.0103605 ] , y: 0 , result: -5.51671232446 , error: 0 , weight: [ 0.89117669 -1.33809272]
+x: [2.85942078 2.95602827] , y: 0 , result: -1.40719075299 , error: 0 , weight: [ 0.89117669 -1.33809272]
+x: [1.0220286  4.11660348] , y: 0 , result: -4.59758907 , error: 0 , weight: [ 0.89117669 -1.33809272]
+x: [2.20656076 5.50616718] , y: 0 , result: -5.40132668283 , error: 0 , weight: [ 0.89117669 -1.33809272]
+x: [0.76241061 1.16471453] , y: 1 , result: -0.879053463723 , error: 1 , weight: [ 1.04365881 -1.10514981]
+x: [1.1424453  2.01467995] , y: 1 , result: -1.03420006331 , error: 1 , weight: [ 1.27214787 -0.70221382]
+x: [1.64164854 0.15020885] , y: 1 , result: 1.98294096636 , error: 0 , weight: [ 1.27214787 -0.70221382]
+x: [0.46546494 3.12315514] , y: 0 , result: -1.60098247372 , error: 0 , weight: [ 1.27214787 -0.70221382]
+x: [0.46546494 3.12315514] , y: 0 , result: -1.60098247372 , error: 0 , weight: [ 1.27214787 -0.70221382]
+x: [ 2.0159847  -0.27042984] , y: 1 , result: 2.75453021779 , error: 0 , weight: [ 1.27214787 -0.70221382]
+x: [-0.65392827  4.76656958] , y: 0 , result: -4.17904449527 , error: 0 , weight: [ 1.27214787 -0.70221382]
+x: [0.95088418 0.94982874] , y: 1 , result: 0.54268241921 , error: 0 , weight: [ 1.27214787 -0.70221382]
+x: [1.37861172 3.61897724] , y: 0 , result: -0.787497869976 , error: 0 , weight: [ 1.27214787 -0.70221382]
+x: [1.38093486 0.92949422] , y: 1 , result: 1.10404965629 , error: 0 , weight: [ 1.27214787 -0.70221382]
+x: [3.97820955 2.37817845] , y: 1 , result: 3.39088102869 , error: 0 , weight: [ 1.27214787 -0.70221382]
+x: [ 1.05505217 -0.64710744] , y: 1 , result: 1.79659016288 , error: 0 , weight: [ 1.27214787 -0.70221382]
+x: [3.00251949 0.74265357] , y: 1 , result: 3.29814717664 , error: 0 , weight: [ 1.27214787 -0.70221382]
+x: [2.11567076 3.06896151] , y: 0 , result: 0.536378869867 , error: -1 , weight: [ 0.84901372 -1.31600612]
+x: [2.63185834 0.6893649 ] , y: 1 , result: 1.32727539882 , error: 0 , weight: [ 0.84901372 -1.31600612]
+x: [-0.07228289  2.88376939] , y: 0 , result: -3.85642733606 , error: 0 , weight: [ 0.84901372 -1.31600612]
+x: [2.50904929 5.7731461 ] , y: 0 , result: -5.46727834125 , error: 0 , weight: [ 0.84901372 -1.31600612]
+x: [1.0427873  4.60625923] , y: 0 , result: -5.17652461892 , error: 0 , weight: [ 0.84901372 -1.31600612]
+x: [0.9867701  6.08965782] , y: 0 , result: -7.17624562643 , error: 0 , weight: [ 0.84901372 -1.31600612]
+x: [0.87305123 4.71438583] , y: 0 , result: -5.46292814754 , error: 0 , weight: [ 0.84901372 -1.31600612]
+x: [0.90779887 0.45984362] , y: 1 , result: 0.165576680234 , error: 0 , weight: [ 0.84901372 -1.31600612]
+x: [2.11567076 3.06896151] , y: 0 , result: -2.2425386321 , error: 0 , weight: [ 0.84901372 -1.31600612]
+x: [1.33263648 5.0103605 ] , y: 0 , result: -5.46223843935 , error: 0 , weight: [ 0.84901372 -1.31600612]
+x: [1.3105127  0.07122512] , y: 1 , result: 1.01891056412 , error: 0 , weight: [ 0.84901372 -1.31600612]
+x: [3.92282648 1.80370832] , y: 1 , result: 0.956842307503 , error: 0 , weight: [ 0.84901372 -1.31600612]
+x: [1.55723507 2.82719571] , y: 1 , result: -2.39849293143 , error: 1 , weight: [ 1.16046073 -0.75056698]
+x: [-0.09448254  5.35823905] , y: 0 , result: -4.13136058545 , error: 0 , weight: [ 1.16046073 -0.75056698]
+x: [3.00251949 0.74265357] , y: 1 , result: 2.92689472094 , error: 0 , weight: [ 1.16046073 -0.75056698]
+x: [-0.29421492  5.27318404] , y: 0 , result: -4.29930267737 , error: 0 , weight: [ 1.16046073 -0.75056698]
+x: [1.59973502 0.91514282] , y: 1 , result: 1.16955368887 , error: 0 , weight: [ 1.16046073 -0.75056698]
+x: [2.91209813 0.24663807] , y: 1 , result: 3.19425714403 , error: 0 , weight: [ 1.16046073 -0.75056698]
+x: [1.31570453 2.44067826] , y: 1 , result: -0.305069070095 , error: 1 , weight: [ 1.42360164 -0.26243133]
+x: [4.4384123  1.84214315] , y: 1 , result: 5.83509493892 , error: 0 , weight: [ 1.42360164 -0.26243133]
+x: [2.91209813 0.24663807] , y: 1 , result: 4.08094211555 , error: 0 , weight: [ 1.42360164 -0.26243133]
+x: [2.3535057  2.22404956] , y: 1 , result: 2.76679428167 , error: 0 , weight: [ 1.42360164 -0.26243133]
+x: [ 2.43169305 -0.20173713] , y: 1 , result: 3.51470435477 , error: 0 , weight: [ 1.42360164 -0.26243133]
+x: [1.3105127  0.07122512] , y: 1 , result: 1.84695632156 , error: 0 , weight: [ 1.42360164 -0.26243133]
+x: [0.58894326 4.00148458] , y: 0 , result: -0.211694323726 , error: 0 , weight: [ 1.42360164 -0.26243133]
+x: [2.47034915 4.09862906] , y: 0 , result: 2.44118442608 , error: -1 , weight: [ 0.92953181 -1.08215714]
+x: [2.66934689 1.81987033] , y: 1 , result: 0.511857164285 , error: 0 , weight: [ 0.92953181 -1.08215714]
+x: [ 2.0159847  -0.27042984] , y: 1 , result: 2.16656948459 , error: 0 , weight: [ 0.92953181 -1.08215714]
+x: [ 2.0159847  -0.27042984] , y: 1 , result: 2.16656948459 , error: 0 , weight: [ 0.92953181 -1.08215714]
+x: [1.98702592 2.61100638] , y: 1 , result: -0.978515411797 , error: 1 , weight: [ 1.32693699 -0.55995587]
+x: [1.33263648 5.0103605 ] , y: 0 , result: -1.03725611204 , error: 0 , weight: [ 1.32693699 -0.55995587]
+x: [ 1.41164912 -1.32573949] , y: 1 , result: 2.61552503733 , error: 0 , weight: [ 1.32693699 -0.55995587]
+x: [1.84070628 3.56162231] , y: 0 , result: 0.448149947364 , error: -1 , weight: [ 0.95879573 -1.27228033]
+x: [2.20656076 5.50616718] , y: 0 , result: -4.88974712868 , error: 0 , weight: [ 0.95879573 -1.27228033]
+x: [1.68608568 0.65828448] , y: 1 , result: 0.779089365734 , error: 0 , weight: [ 0.95879573 -1.27228033]
+x: [0.95088418 0.94982874] , y: 1 , result: -0.296744720478 , error: 1 , weight: [ 1.14897257 -1.08231458]
+x: [3.92282648 1.80370832] , y: 1 , result: 2.55504022086 , error: 0 , weight: [ 1.14897257 -1.08231458]
+x: [2.63185834 0.6893649 ] , y: 1 , result: 2.27782335581 , error: 0 , weight: [ 1.14897257 -1.08231458]
+x: [ 2.43169305 -0.20173713] , y: 1 , result: 3.01229165677 , error: 0 , weight: [ 1.14897257 -1.08231458]
+x: [2.97612635 1.21639131] , y: 1 , result: 2.10296948787 , error: 0 , weight: [ 1.14897257 -1.08231458]
+x: [0.56400993 1.33705536] , y: 1 , result: -0.799082572035 , error: 1 , weight: [ 1.26177456 -0.81490351]
+x: [0.87305123 4.71438583] , y: 0 , result: -2.74017571867 , error: 0 , weight: [ 1.26177456 -0.81490351]
+x: [1.9263585  4.15243012] , y: 0 , result: -0.953199726723 , error: 0 , weight: [ 1.26177456 -0.81490351]
+x: [2.82705807 1.72116781] , y: 1 , result: 2.16452426039 , error: 0 , weight: [ 1.26177456 -0.81490351]
+x: [1.33263648 5.0103605 ] , y: 0 , result: -2.40147353812 , error: 0 , weight: [ 1.26177456 -0.81490351]
+x: [ 1.05505217 -0.64710744] , y: 1 , result: 1.85856810893 , error: 0 , weight: [ 1.26177456 -0.81490351]
+x: [1.1424453  2.01467995] , y: 1 , result: -0.200261346946 , error: 1 , weight: [ 1.49026362 -0.41196752]
+x: [0.87305123 4.71438583] , y: 0 , result: -0.641097345685 , error: 0 , weight: [ 1.49026362 -0.41196752]
+x: [3.00251949 0.74265357] , y: 1 , result: 4.16859640588 , error: 0 , weight: [ 1.49026362 -0.41196752]
+x: [3.24329731 1.21460627] , y: 1 , result: 4.33298965344 , error: 0 , weight: [ 1.49026362 -0.41196752]
+x: [1.956815   0.23418537] , y: 1 , result: 2.81969342686 , error: 0 , weight: [ 1.49026362 -0.41196752]
+x: [4.4384123  1.84214315] , y: 1 , result: 5.85550122087 , error: 0 , weight: [ 1.49026362 -0.41196752]
+x: [2.97612635 1.21639131] , y: 1 , result: 3.93409910075 , error: 0 , weight: [ 1.49026362 -0.41196752]
+x: [-0.73000011  6.25456272] , y: 0 , result: -3.66456928125 , error: 0 , weight: [ 1.49026362 -0.41196752]
+x: [ 2.45127423 -0.19539785] , y: 1 , result: 3.73354237103 , error: 0 , weight: [ 1.49026362 -0.41196752]
+x: [1.98702592 2.61100638] , y: 1 , result: 1.88554261153 , error: 0 , weight: [ 1.49026362 -0.41196752]
+x: [-0.29421492  5.27318404] , y: 0 , result: -2.61083832403 , error: 0 , weight: [ 1.49026362 -0.41196752]
+x: [1.02102468 1.57925818] , y: 1 , result: 0.87099286106 , error: 0 , weight: [ 1.49026362 -0.41196752]
+x: [1.1312175  4.68194985] , y: 0 , result: -0.242998964304 , error: 0 , weight: [ 1.49026362 -0.41196752]
+x: [0.66471755 4.35995267] , y: 0 , result: -0.805554500794 , error: 0 , weight: [ 1.49026362 -0.41196752]
+x: [1.70536064 4.43277024] , y: 0 , result: 0.715279567222 , error: -1 , weight: [ 1.14919149 -1.29852156]
+x: [ 3.18190344 -0.18226785] , y: 1 , result: 3.8932950849 , error: 0 , weight: [ 1.14919149 -1.29852156]
+x: [ 1.05505217 -0.64710744] , y: 1 , result: 2.05273993922 , error: 0 , weight: [ 1.14919149 -1.29852156]
+x: [ 1.70127361 -0.47728763] , y: 1 , result: 2.57485743628 , error: 0 , weight: [ 1.14919149 -1.29852156]
+x: [1.7373078  4.42546234] , y: 0 , result: -3.75005894666 , error: 0 , weight: [ 1.14919149 -1.29852156]
+x: [0.95088418 0.94982874] , y: 1 , result: -0.140625092401 , error: 1 , weight: [ 1.33936832 -1.10855582]
+x: [-0.29421492  5.27318404] , y: 0 , result: -6.23968097975 , error: 0 , weight: [ 1.33936832 -1.10855582]
+x: [1.42013331 4.63746165] , y: 0 , result: -3.23880351867 , error: 0 , weight: [ 1.33936832 -1.10855582]
+x: [1.55723507 2.82719571] , y: 1 , result: -1.04839292603 , error: 1 , weight: [ 1.65081534 -0.54311667]
+x: [ 3.18190344 -0.18226785] , y: 1 , result: 5.35172771823 , error: 0 , weight: [ 1.65081534 -0.54311667]
+x: [1.55723507 2.82719571] , y: 1 , result: 1.03521040786 , error: 0 , weight: [ 1.65081534 -0.54311667]
+x: [2.91209813 0.24663807] , y: 1 , result: 4.67338301966 , error: 0 , weight: [ 1.65081534 -0.54311667]
+x: [1.02102468 1.57925818] , y: 1 , result: 0.827801753156 , error: 0 , weight: [ 1.65081534 -0.54311667]
+x: [0.08848433 2.32299086] , y: 0 , result: -1.11558377846 , error: 0 , weight: [ 1.65081534 -0.54311667]
+x: [1.37861172 3.61897724] , y: 0 , result: 0.310306493002 , error: -1 , weight: [ 1.37509299 -1.26691212]
+
+    \end{Verbatim}
+
+    \subsubsection{Plot the PLA Errors}\label{plot-the-pla-errors}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{k+kn}{from} \PY{n+nn}{pylab} \PY{k+kn}{import} \PY{n}{plot}\PY{p}{,} \PY{n}{ylim}
+         \PY{n}{ylim}\PY{p}{(}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+         \PY{n}{plot}\PY{p}{(}\PY{n}{errors}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_20_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsection{PART B}\label{part-b}
+
+    \subsubsection{Gradient Descent}\label{gradient-descent}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{k}{def} \PY{n+nf}{predict}\PY{p}{(}\PY{n}{row}\PY{p}{,} \PY{n}{weights}\PY{p}{)}\PY{p}{:}
+             \PY{n}{activation} \PY{o}{=} \PY{n}{weights}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+             \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{row}\PY{p}{)}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{activation} \PY{o}{+}\PY{o}{=} \PY{n}{weights}\PY{p}{[}\PY{n}{i} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{]} \PY{o}{*} \PY{n}{row}\PY{p}{[}\PY{n}{i}\PY{p}{]}
+             \PY{k}{return} \PY{l+m+mf}{1.0} \PY{k}{if} \PY{n}{activation} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{l+m+mf}{0.0} \PY{k}{else} \PY{l+m+mf}{0.0}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{k}{def} \PY{n+nf}{train\PYZus{}weights}\PY{p}{(}\PY{n}{train}\PY{p}{,} \PY{n}{l\PYZus{}rate}\PY{p}{,} \PY{n}{n\PYZus{}epoch}\PY{p}{)}\PY{p}{:}
+             \PY{n}{weights} \PY{o}{=} \PY{p}{[}\PY{l+m+mf}{0.0} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{train}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{p}{]}
+             \PY{n}{epoch} \PY{o}{=} \PY{l+m+mi}{0}
+             \PY{k}{for} \PY{n}{epoch} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{n\PYZus{}epoch}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{sum\PYZus{}error} \PY{o}{=} \PY{l+m+mf}{0.0}
+                 \PY{k}{for} \PY{n}{row} \PY{o+ow}{in} \PY{n}{train}\PY{p}{:}
+                     \PY{n}{prediction} \PY{o}{=} \PY{n}{predict}\PY{p}{(}\PY{n}{row}\PY{p}{,} \PY{n}{weights}\PY{p}{)}
+                     \PY{n}{error} \PY{o}{=} \PY{n}{row}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{n}{prediction}
+                     \PY{n}{sum\PYZus{}error} \PY{o}{+}\PY{o}{=} \PY{n}{error}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}
+                     \PY{n}{weights}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{=} \PY{n}{weights}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{+} \PY{n}{l\PYZus{}rate} \PY{o}{*} \PY{n}{error}
+                     \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{row}\PY{p}{)}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{:}
+                         \PY{n}{weights}\PY{p}{[}\PY{n}{i} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{]} \PY{o}{=} \PY{n}{weights}\PY{p}{[}\PY{n}{i} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{]} \PY{o}{+} \PY{n}{l\PYZus{}rate} \PY{o}{*} \PY{n}{error} \PY{o}{*} \PY{n}{row}\PY{p}{[}\PY{n}{i}\PY{p}{]}
+             \PY{k}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZgt{}epoch=}\PY{l+s+si}{\PYZpc{}d}\PY{l+s+s1}{, lrate=}\PY{l+s+si}{\PYZpc{}.3f}\PY{l+s+s1}{, error=}\PY{l+s+si}{\PYZpc{}.3f}\PY{l+s+s1}{\PYZsq{}} \PY{o}{\PYZpc{}} \PY{p}{(}\PY{n}{epoch}\PY{p}{,} \PY{n}{l\PYZus{}rate}\PY{p}{,} \PY{n}{sum\PYZus{}error}\PY{p}{)}\PY{p}{)}
+             \PY{k}{return} \PY{n}{weights}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{c+c1}{\PYZsh{}for t in range(X.shape[0]): }
+             \PY{c+c1}{\PYZsh{}predict(X[i], y[i])}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{n}{clf\PYZus{}10} \PY{o}{=} \PY{n}{linear\PYZus{}model}\PY{o}{.}\PY{n}{SGDClassifier}\PY{p}{(}\PY{p}{)}
+         \PY{n}{clf\PYZus{}50} \PY{o}{=} \PY{n}{linear\PYZus{}model}\PY{o}{.}\PY{n}{SGDClassifier}\PY{p}{(}\PY{p}{)}
+         \PY{n}{clf\PYZus{}100} \PY{o}{=} \PY{n}{linear\PYZus{}model}\PY{o}{.}\PY{n}{SGDClassifier}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}21}]:} \PY{n}{clf\PYZus{}10}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}10}\PY{p}{,} \PY{n}{y\PYZus{}10}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}21}]:} SGDClassifier(alpha=0.0001, average=False, class\_weight=None, epsilon=0.1,
+                eta0=0.0, fit\_intercept=True, l1\_ratio=0.15,
+                learning\_rate='optimal', loss='hinge', max\_iter=None, n\_iter=None,
+                n\_jobs=1, penalty='l2', power\_t=0.5, random\_state=None,
+                shuffle=True, tol=None, verbose=0, warm\_start=False)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}19}]:} \PY{n}{clf\PYZus{}50}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}50}\PY{p}{,} \PY{n}{y\PYZus{}50}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}19}]:} SGDClassifier(alpha=0.0001, average=False, class\_weight=None, epsilon=0.1,
+                eta0=0.0, fit\_intercept=True, l1\_ratio=0.15,
+                learning\_rate='optimal', loss='hinge', max\_iter=None, n\_iter=None,
+                n\_jobs=1, penalty='l2', power\_t=0.5, random\_state=None,
+                shuffle=True, tol=None, verbose=0, warm\_start=False)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}20}]:} \PY{n}{clf\PYZus{}100}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}100}\PY{p}{,} \PY{n}{y\PYZus{}100}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}20}]:} SGDClassifier(alpha=0.0001, average=False, class\_weight=None, epsilon=0.1,
+                eta0=0.0, fit\_intercept=True, l1\_ratio=0.15,
+                learning\_rate='optimal', loss='hinge', max\_iter=None, n\_iter=None,
+                n\_jobs=1, penalty='l2', power\_t=0.5, random\_state=None,
+                shuffle=True, tol=None, verbose=0, warm\_start=False)
+\end{Verbatim}
+            
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}

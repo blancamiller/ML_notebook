@@ -1,0 +1,1195 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Miller\_Blanca\_HW6}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \section{HW6: Train Neural Net for Digits Data
+Set}\label{hw6-train-neural-net-for-digits-data-set}
+
+    Blanca Miller STAT 760 03.22.2018 
+
+    \textbf{Objective:} Learn to classify digits with a neural net. Using
+the digits dataset, reduce the dimensions of the dataset to 16 using
+PCA, then train a neural network for the 10 classes, and provide a
+confusion matrix to evaluate the performance of the classifying neural
+net.
+
+We'll use a multi-layer perceptron (MLP) to train the classifier model.
+MLP trains using gradient descent. The gradients are calculated using
+backpropogation. For classification, MLP minimizes the Cross-Entropy
+loss function.
+
+\textbf{Digits Data Set:}
+https://web.stanford.edu/\textasciitilde{}hastie/ElemStatLearn/
+
+    \paragraph{Import Libraries}\label{import-libraries}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{k+kn}{import} \PY{n+nn}{sklearn}
+        \PY{k+kn}{import} \PY{n+nn}{itertools}
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k+kn}{as} \PY{n+nn}{np}
+        \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k+kn}{as} \PY{n+nn}{pd}
+        \PY{k+kn}{import} \PY{n+nn}{seaborn} \PY{k+kn}{as} \PY{n+nn}{sb}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib.pyplot} \PY{k+kn}{as} \PY{n+nn}{plt}
+        
+        \PY{k+kn}{from} \PY{n+nn}{sklearn} \PY{k+kn}{import} \PY{n}{preprocessing}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn} \PY{k+kn}{import} \PY{n}{decomposition}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn.neural\PYZus{}network} \PY{k+kn}{import} \PY{n}{MLPClassifier}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn.metrics} \PY{k+kn}{import} \PY{n}{confusion\PYZus{}matrix}
+\end{Verbatim}
+
+
+    \paragraph{Function: Confusion Matrix}\label{function-confusion-matrix}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}20}]:} \PY{k}{def} \PY{n+nf}{plot\PYZus{}confusion\PYZus{}matrix}\PY{p}{(}\PY{n}{cm}\PY{p}{,} \PY{n}{classes}\PY{p}{,}
+                                   \PY{n}{normalize}\PY{o}{=}\PY{n+nb+bp}{False}\PY{p}{,}
+                                   \PY{n}{title}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Confusion matrix}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                                   \PY{n}{cmap}\PY{o}{=}\PY{n}{plt}\PY{o}{.}\PY{n}{cm}\PY{o}{.}\PY{n}{Blues}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+         \PY{l+s+sd}{    This function prints and plots the confusion matrix.}
+         \PY{l+s+sd}{    Normalization can be applied by setting `normalize=True`.}
+         \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+             \PY{k}{if} \PY{n}{normalize}\PY{p}{:}
+                 \PY{n}{cm} \PY{o}{=} \PY{n}{cm}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{float}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{o}{/} \PY{n}{cm}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{newaxis}\PY{p}{]}
+                 \PY{k}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Normalized confusion matrix}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+             \PY{k}{else}\PY{p}{:}
+                 \PY{k}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Confusion matrix, without normalization}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+             \PY{k}{print}\PY{p}{(}\PY{n}{cm}\PY{p}{)}
+         
+             \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{cm}\PY{p}{,} \PY{n}{interpolation}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{nearest}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{cmap}\PY{o}{=}\PY{n}{cmap}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{n}{title}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{colorbar}\PY{p}{(}\PY{p}{)}
+             \PY{n}{tick\PYZus{}marks} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{classes}\PY{p}{)}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{xticks}\PY{p}{(}\PY{n}{tick\PYZus{}marks}\PY{p}{,} \PY{n}{classes}\PY{p}{,} \PY{n}{rotation}\PY{o}{=}\PY{l+m+mi}{45}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{yticks}\PY{p}{(}\PY{n}{tick\PYZus{}marks}\PY{p}{,} \PY{n}{classes}\PY{p}{)}
+         
+             \PY{n}{fmt} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{.2f}\PY{l+s+s1}{\PYZsq{}} \PY{k}{if} \PY{n}{normalize} \PY{k}{else} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{d}\PY{l+s+s1}{\PYZsq{}}
+             \PY{n}{thresh} \PY{o}{=} \PY{n}{cm}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{p}{)} \PY{o}{/} \PY{l+m+mf}{2.}
+             \PY{k}{for} \PY{n}{i}\PY{p}{,} \PY{n}{j} \PY{o+ow}{in} \PY{n}{itertools}\PY{o}{.}\PY{n}{product}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{n}{cm}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{,} \PY{n+nb}{range}\PY{p}{(}\PY{n}{cm}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{plt}\PY{o}{.}\PY{n}{text}\PY{p}{(}\PY{n}{j}\PY{p}{,} \PY{n}{i}\PY{p}{,} \PY{n}{format}\PY{p}{(}\PY{n}{cm}\PY{p}{[}\PY{n}{i}\PY{p}{,} \PY{n}{j}\PY{p}{]}\PY{p}{,} \PY{n}{fmt}\PY{p}{)}\PY{p}{,}
+                          \PY{n}{horizontalalignment}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{center}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+                          \PY{n}{color}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{white}\PY{l+s+s2}{\PYZdq{}} \PY{k}{if} \PY{n}{cm}\PY{p}{[}\PY{n}{i}\PY{p}{,} \PY{n}{j}\PY{p}{]} \PY{o}{\PYZgt{}} \PY{n}{thresh} \PY{k}{else} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{black}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         
+             \PY{n}{plt}\PY{o}{.}\PY{n}{tight\PYZus{}layout}\PY{p}{(}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{True label}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Predicted label}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \paragraph{Load Digits Data Set}\label{load-digits-data-set}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{n}{train} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{digits\PYZus{}data.train}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{delimiter}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{header}\PY{o}{=}\PY{n+nb+bp}{None}\PY{p}{)}
+        \PY{n}{test} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{digits\PYZus{}data.test}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{delimiter}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{header}\PY{o}{=}\PY{n+nb+bp}{None}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{c+c1}{\PYZsh{} print data set dimensionality}
+        \PY{k}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Training set: \PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{train}\PY{o}{.}\PY{n}{shape}\PY{p}{)}\PY{p}{)}
+        \PY{k}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Testing set: \PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{test}\PY{o}{.}\PY{n}{shape}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Training set: (7291, 258)
+Testing set: (2007, 257)
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{c+c1}{\PYZsh{} print subset (head) of training observations for verification}
+        \PY{n}{train}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}5}]:}    0    1    2    3      4      5      6      7      8      9   {\ldots}     248  \textbackslash{}
+        0  6.0 -1.0 -1.0 -1.0 -1.000 -1.000 -1.000 -1.000 -0.631  0.862 {\ldots}   0.823   
+        1  5.0 -1.0 -1.0 -1.0 -0.813 -0.671 -0.809 -0.887 -0.671 -0.853 {\ldots}  -0.671   
+        2  4.0 -1.0 -1.0 -1.0 -1.000 -1.000 -1.000 -1.000 -1.000 -1.000 {\ldots}  -1.000   
+        3  7.0 -1.0 -1.0 -1.0 -1.000 -1.000 -0.273  0.684  0.960  0.450 {\ldots}   1.000   
+        4  3.0 -1.0 -1.0 -1.0 -1.000 -1.000 -0.928 -0.204  0.751  0.466 {\ldots}   0.639   
+        
+             249    250    251    252    253    254    255  256  257  
+        0  1.000  0.482 -0.474 -0.991 -1.000 -1.000 -1.000 -1.0  NaN  
+        1 -0.033  0.761  0.762  0.126 -0.095 -0.671 -0.828 -1.0  NaN  
+        2 -1.000 -0.109  1.000 -0.179 -1.000 -1.000 -1.000 -1.0  NaN  
+        3  0.536 -0.987 -1.000 -1.000 -1.000 -1.000 -1.000 -1.0  NaN  
+        4  1.000  1.000  0.791  0.439 -0.199 -0.883 -1.000 -1.0  NaN  
+        
+        [5 rows x 258 columns]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{c+c1}{\PYZsh{} print subset (head) testing observations for verification}
+        \PY{n}{test}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}6}]:}    0    1    2    3      4    5      6      7      8      9   {\ldots}     247  \textbackslash{}
+        0    9 -1.0 -1.0 -1.0 -1.000 -1.0 -0.948 -0.561  0.148  0.384 {\ldots}  -1.000   
+        1    6 -1.0 -1.0 -1.0 -1.000 -1.0 -1.000 -1.000 -1.000 -1.000 {\ldots}  -1.000   
+        2    3 -1.0 -1.0 -1.0 -0.593  0.7  1.000  1.000  1.000  1.000 {\ldots}   1.000   
+        3    6 -1.0 -1.0 -1.0 -1.000 -1.0 -1.000 -1.000 -1.000 -1.000 {\ldots}  -1.000   
+        4    6 -1.0 -1.0 -1.0 -1.000 -1.0 -1.000 -1.000 -0.858 -0.106 {\ldots}   0.901   
+        
+             248    249    250    251    252  253  254  255  256  
+        0 -0.908  0.430  0.622 -0.973 -1.000 -1.0 -1.0 -1.0 -1.0  
+        1 -1.000 -1.000 -1.000 -1.000 -1.000 -1.0 -1.0 -1.0 -1.0  
+        2  0.717  0.333  0.162 -0.393 -1.000 -1.0 -1.0 -1.0 -1.0  
+        3 -1.000 -1.000 -1.000 -1.000 -1.000 -1.0 -1.0 -1.0 -1.0  
+        4  0.901  0.901  0.290 -0.369 -0.867 -1.0 -1.0 -1.0 -1.0  
+        
+        [5 rows x 257 columns]
+\end{Verbatim}
+            
+    \paragraph{Convert Data Frame into Numpy
+Array}\label{convert-data-frame-into-numpy-array}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{n}{train\PYZus{}set} \PY{o}{=} \PY{n}{train}\PY{o}{.}\PY{n}{as\PYZus{}matrix}\PY{p}{(}\PY{p}{)}
+        \PY{n}{test\PYZus{}set} \PY{o}{=} \PY{n}{test}\PY{o}{.}\PY{n}{as\PYZus{}matrix}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \paragraph{Parse Data Values from their Labels \& Print
+Dimensions}\label{parse-data-values-from-their-labels-print-dimensions}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{c+c1}{\PYZsh{} get all rows from 1st\PYZhy{}(last\PYZhy{}1) column}
+        \PY{c+c1}{\PYZsh{} last\PYZhy{}1 is to remove NaN column that numpy inserted}
+        \PY{n}{X\PYZus{}train} \PY{o}{=} \PY{n}{train\PYZus{}set}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{:}\PY{l+m+mi}{257}\PY{p}{]}
+        
+        \PY{c+c1}{\PYZsh{} get all rows for 0th column}
+        \PY{n}{y\PYZus{}train} \PY{o}{=} \PY{n}{train\PYZus{}set}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}
+        
+        \PY{c+c1}{\PYZsh{} get all rows for 1st \PYZhy{} last columns}
+        \PY{n}{X\PYZus{}test} \PY{o}{=} \PY{n}{test\PYZus{}set}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{:}\PY{p}{]}
+        
+        \PY{c+c1}{\PYZsh{} get all rows for 0th column}
+        \PY{n}{y\PYZus{}test} \PY{o}{=} \PY{n}{test\PYZus{}set}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{c+c1}{\PYZsh{} print data \PYZam{} label set dimensionality for verification}
+        \PY{k}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Training Data: \PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{o}{.}\PY{n}{shape}\PY{p}{)}\PY{p}{)}
+        \PY{k}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Training Labels: \PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{y\PYZus{}train}\PY{o}{.}\PY{n}{shape}\PY{p}{)}\PY{p}{)}
+        \PY{k}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Testing Data: \PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{o}{.}\PY{n}{shape}\PY{p}{)}\PY{p}{)}
+        \PY{k}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Testing Labels: \PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{y\PYZus{}test}\PY{o}{.}\PY{n}{shape}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Training Data: (7291, 256)
+Training Labels: (7291,)
+Testing Data: (2007, 256)
+Testing Labels: (2007,)
+
+    \end{Verbatim}
+
+    \paragraph{Determine \& Print Number of Samples \&
+Features}\label{determine-print-number-of-samples-features}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{n}{n\PYZus{}trains} \PY{o}{=} \PY{n}{X\PYZus{}train}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+         \PY{n}{n\PYZus{}features} \PY{o}{=} \PY{n}{X\PYZus{}train}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{k}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Number of Training Samples: \PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{n\PYZus{}trains}\PY{p}{)}\PY{p}{)}
+         \PY{k}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Number of Data Features: \PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{n\PYZus{}features}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Number of Training Samples: 7291
+Number of Data Features: 256
+
+    \end{Verbatim}
+
+    \paragraph{Standardize Data to Obtain Similar Inputs \& Weight
+Magnitudes}\label{standardize-data-to-obtain-similar-inputs-weight-magnitudes}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{c+c1}{\PYZsh{} set axis to 1 to standardize by sample/vector, rather than by feature }
+         \PY{n}{X\PYZus{}train} \PY{o}{=} \PY{n}{preprocessing}\PY{o}{.}\PY{n}{scale}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{X\PYZus{}test} \PY{o}{=} \PY{n}{preprocessing}\PY{o}{.}\PY{n}{scale}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+\end{Verbatim}
+
+
+    \paragraph{Principal Component
+Analysis}\label{principal-component-analysis}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{c+c1}{\PYZsh{} designate number of principal components}
+         \PY{n}{k} \PY{o}{=} \PY{l+m+mi}{16}
+         
+         \PY{c+c1}{\PYZsh{} construct object representing PCA operation, executed by \PYZdq{}fit\PYZdq{} method}
+         \PY{n}{pca} \PY{o}{=} \PY{n}{decomposition}\PY{o}{.}\PY{n}{PCA}\PY{p}{(}\PY{n}{n\PYZus{}components} \PY{o}{=} \PY{n}{k}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} execute PCA: identifies n components}
+         \PY{n}{pca}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} project data: n dimensional reduced representation}
+         \PY{n}{X\PYZus{}train\PYZus{}trans} \PY{o}{=} \PY{n}{pca}\PY{o}{.}\PY{n}{transform}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{)}
+         \PY{n}{X\PYZus{}test\PYZus{}trans} \PY{o}{=} \PY{n}{pca}\PY{o}{.}\PY{n}{transform}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} amount of information compressed in the chosen k components}
+         \PY{n}{pca}\PY{o}{.}\PY{n}{explained\PYZus{}variance\PYZus{}ratio\PYZus{}}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}13}]:} array([0.15582707, 0.10293384, 0.06530886, 0.05641492, 0.04107802,
+                0.03749884, 0.03463196, 0.02686704, 0.02640698, 0.02329143,
+                0.02067199, 0.01869689, 0.01606251, 0.01518533, 0.01486043,
+                0.01334584])
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{c+c1}{\PYZsh{} the percentage of cumulative variance \PYZhy{} recommended to keep 70\PYZpc{}+}
+         \PY{n}{pca}\PY{o}{.}\PY{n}{explained\PYZus{}variance\PYZus{}ratio\PYZus{}}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}14}]:} 0.6690819596196369
+\end{Verbatim}
+            
+    \textbf{Analysis:} This value, the cumulative variance, tell us that
+reducing the data's dimensionality from the original 256 dimensions to
+the chosen 16 dimensions only removed \textasciitilde{}30\% of the
+information contained in the original components. This is OK because
+some of that information contains noise, such as in the form of outliers
+and redundancy. Thus, we are only retaining the components that provide
+the fundamental structure of the data set.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{n}{components} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{pca}\PY{o}{.}\PY{n}{components\PYZus{}}\PY{p}{)}
+         \PY{n}{components}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}15}]:}          0         1         2         3         4         5         6    \textbackslash{}
+         0   0.020767  0.020892  0.020038  0.017383  0.011280 -0.001436  0.002770   
+         1   0.003684  0.007541  0.013784  0.025167  0.041100  0.055579  0.051438   
+         2  -0.003664  0.000027  0.004500  0.011590  0.020164  0.024164  0.025705   
+         3   0.000229  0.001276 -0.002920 -0.015478 -0.038011 -0.066440 -0.102984   
+         4  -0.005367  0.000803  0.012565  0.035269  0.074511  0.107217  0.100940   
+         5   0.008705  0.020989  0.038342  0.057897  0.070894  0.058736  0.025441   
+         6  -0.000269 -0.001461 -0.000901  0.001843  0.007364 -0.003316 -0.051236   
+         7   0.003810  0.007157  0.008442 -0.001520 -0.036129 -0.101697 -0.172361   
+         8   0.012085  0.015690  0.024078  0.035436  0.042810  0.036047  0.020982   
+         9   0.009735  0.007050  0.001282 -0.010769 -0.025673 -0.028261 -0.009460   
+         10 -0.000172 -0.000898 -0.002273 -0.012053 -0.035275 -0.039093 -0.009239   
+         11  0.008315  0.010508  0.019508  0.041675  0.077638  0.101674  0.091590   
+         12 -0.008215 -0.003632 -0.000909 -0.002781 -0.006227 -0.011125 -0.029303   
+         13  0.000215  0.002082 -0.000266 -0.007824 -0.017439 -0.023284 -0.028375   
+         14  0.012847  0.006722 -0.003902 -0.026232 -0.047851 -0.050264  0.002876   
+         15  0.008042  0.022960  0.032656  0.030037  0.019813  0.021550  0.084847   
+         
+                  7         8         9      {\ldots}          246       247       248  \textbackslash{}
+         0   0.074980  0.041810 -0.009762    {\ldots}    -0.057267  0.023995  0.051138   
+         1   0.003358  0.023490  0.071997    {\ldots}    -0.022188 -0.024049 -0.050959   
+         2   0.046801 -0.004783 -0.046556    {\ldots}    -0.030538 -0.020838 -0.035574   
+         3  -0.132646 -0.132645 -0.106963    {\ldots}    -0.120585 -0.145045 -0.133225   
+         4   0.006847 -0.041835 -0.053673    {\ldots}     0.029224 -0.079775 -0.159146   
+         5   0.029680  0.032365  0.020442    {\ldots}     0.079886  0.058057  0.017508   
+         6  -0.100110 -0.095994 -0.051980    {\ldots}    -0.055881 -0.109261 -0.016510   
+         7  -0.205522 -0.091559  0.058494    {\ldots}    -0.107305 -0.107253 -0.039559   
+         8   0.028393 -0.015643 -0.024804    {\ldots}     0.024561  0.000700 -0.036937   
+         9   0.040720  0.113017  0.143807    {\ldots}     0.099133  0.134568  0.101310   
+         10  0.070049  0.070011  0.020560    {\ldots}    -0.123343 -0.021531  0.099341   
+         11  0.059449  0.103442  0.125984    {\ldots}     0.015272  0.064629  0.037693   
+         12 -0.061122 -0.055431 -0.047785    {\ldots}     0.008469 -0.020743 -0.083494   
+         13 -0.055116 -0.043497  0.055167    {\ldots}    -0.006971 -0.020176 -0.081216   
+         14  0.118476  0.181990  0.153675    {\ldots}    -0.053141 -0.039034  0.002510   
+         15  0.082608  0.065672  0.026032    {\ldots}     0.109214  0.039403 -0.051989   
+         
+                  249       250       251       252       253       254       255  
+         0  -0.026917 -0.026235 -0.000480  0.013252  0.017844  0.019480  0.020427  
+         1  -0.034106 -0.019799 -0.007247  0.001185  0.003255  0.003449  0.003018  
+         2  -0.061992 -0.021720 -0.001798  0.000242 -0.000865 -0.002337 -0.003997  
+         3  -0.099457 -0.066500 -0.036361 -0.013576 -0.002375  0.001870  0.001240  
+         4  -0.092637 -0.040494 -0.008839  0.012617  0.018684  0.010167 -0.001674  
+         5  -0.010492 -0.002588  0.002359  0.006143  0.006480  0.005991  0.005408  
+         6   0.082550  0.078238  0.044593  0.018306  0.005159  0.001067  0.000370  
+         7   0.055451  0.088753  0.074727  0.041191  0.019730  0.009249  0.003658  
+         8  -0.044876  0.014082  0.029055  0.024138  0.019911  0.016647  0.013026  
+         9   0.057452  0.035109  0.018633  0.011713  0.012772  0.012191  0.010595  
+         10  0.141361  0.130109  0.085012  0.050574  0.029696  0.014234  0.003480  
+         11  0.031405  0.026185  0.009819  0.002551  0.001464  0.004108  0.006907  
+         12 -0.037802  0.016344  0.021190  0.002064 -0.007437 -0.010369 -0.010895  
+         13 -0.020587  0.033587  0.023091  0.004741 -0.005931 -0.007559 -0.003029  
+         14 -0.025478 -0.022179 -0.000917  0.016984  0.022607  0.020705  0.015673  
+         15  0.010429  0.005831  0.002895  0.001470 -0.002573 -0.001395  0.001238  
+         
+         [16 rows x 256 columns]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{n}{sb}\PY{o}{.}\PY{n}{heatmap}\PY{p}{(}\PY{n}{components}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}16}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x7f84e2b1ff50>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_27_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsection{Train a 1 Hidden Layer Neural
+Net}\label{train-a-1-hidden-layer-neural-net}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}61}]:} \PY{c+c1}{\PYZsh{} initialize classifier objects}
+         \PY{n}{clf\PYZus{}10} \PY{o}{=} \PY{n}{MLPClassifier}\PY{p}{(}\PY{n}{hidden\PYZus{}layer\PYZus{}sizes}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,}\PY{p}{)}\PY{p}{)}
+         \PY{n}{clf\PYZus{}50} \PY{o}{=} \PY{n}{MLPClassifier}\PY{p}{(}\PY{n}{hidden\PYZus{}layer\PYZus{}sizes}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{50}\PY{p}{,}\PY{p}{)}\PY{p}{)}
+         \PY{n}{clf\PYZus{}100} \PY{o}{=} \PY{n}{MLPClassifier}\PY{p}{(}\PY{p}{)}
+         \PY{n}{clf\PYZus{}150} \PY{o}{=} \PY{n}{MLPClassifier}\PY{p}{(}\PY{n}{hidden\PYZus{}layer\PYZus{}sizes}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{150}\PY{p}{,}\PY{p}{)}\PY{p}{)}
+         \PY{n}{clf\PYZus{}199} \PY{o}{=} \PY{n}{MLPClassifier}\PY{p}{(}\PY{n}{hidden\PYZus{}layer\PYZus{}sizes}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{200}\PY{p}{,}\PY{p}{)}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} fit the classifier model to the data matrix X and is targets y}
+         \PY{n}{clf\PYZus{}10}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train\PYZus{}trans}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{)}
+         \PY{n}{clf\PYZus{}50}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train\PYZus{}trans}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{)}
+         \PY{n}{clf\PYZus{}100}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train\PYZus{}trans}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{)}
+         \PY{n}{clf\PYZus{}150}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train\PYZus{}trans}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{)}
+         \PY{n}{clf\PYZus{}199}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train\PYZus{}trans}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}61}]:} MLPClassifier(activation='relu', alpha=0.0001, batch\_size='auto', beta\_1=0.9,
+                beta\_2=0.999, early\_stopping=False, epsilon=1e-08,
+                hidden\_layer\_sizes=(200,), learning\_rate='constant',
+                learning\_rate\_init=0.001, max\_iter=200, momentum=0.9,
+                nesterovs\_momentum=True, power\_t=0.5, random\_state=None,
+                shuffle=True, solver='adam', tol=0.0001, validation\_fraction=0.1,
+                verbose=False, warm\_start=False)
+\end{Verbatim}
+            
+    \paragraph{Determine Neural Nets Predictive
+Score}\label{determine-neural-nets-predictive-score}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}23}]:} \PY{k}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Training 10 hidden layer set score: }\PY{l+s+si}{\PYZpc{}f}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{n}{clf\PYZus{}10}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{X\PYZus{}train\PYZus{}trans}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{)}\PY{p}{)}
+         \PY{k}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Test 10 hidden set score: }\PY{l+s+si}{\PYZpc{}f}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{n}{clf\PYZus{}10}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{X\PYZus{}test\PYZus{}trans}\PY{p}{,} \PY{n}{y\PYZus{}test}\PY{p}{)}\PY{p}{)}
+         
+         \PY{k}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Training 50 hidden layer set score: }\PY{l+s+si}{\PYZpc{}f}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{n}{clf\PYZus{}50}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{X\PYZus{}train\PYZus{}trans}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{)}\PY{p}{)}
+         \PY{k}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Test 50 hidden set score: }\PY{l+s+si}{\PYZpc{}f}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{n}{clf\PYZus{}50}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{X\PYZus{}test\PYZus{}trans}\PY{p}{,} \PY{n}{y\PYZus{}test}\PY{p}{)}\PY{p}{)}
+         
+         \PY{k}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Training 100 hidden layer set score: }\PY{l+s+si}{\PYZpc{}f}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{n}{clf\PYZus{}100}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{X\PYZus{}train\PYZus{}trans}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{)}\PY{p}{)}
+         \PY{k}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Test 100 hidden set score: }\PY{l+s+si}{\PYZpc{}f}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{n}{clf\PYZus{}100}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{X\PYZus{}test\PYZus{}trans}\PY{p}{,} \PY{n}{y\PYZus{}test}\PY{p}{)}\PY{p}{)}
+         
+         \PY{k}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Training 150 hidden layer set score: }\PY{l+s+si}{\PYZpc{}f}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{n}{clf\PYZus{}150}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{X\PYZus{}train\PYZus{}trans}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{)}\PY{p}{)}
+         \PY{k}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Test 150 hidden set score: }\PY{l+s+si}{\PYZpc{}f}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{n}{clf\PYZus{}150}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{X\PYZus{}test\PYZus{}trans}\PY{p}{,} \PY{n}{y\PYZus{}test}\PY{p}{)}\PY{p}{)}
+         
+         \PY{k}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Training 199 hidden layer set score: }\PY{l+s+si}{\PYZpc{}f}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{n}{clf\PYZus{}199}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{X\PYZus{}train\PYZus{}trans}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{)}\PY{p}{)}
+         \PY{k}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Test 199 hidden set score: }\PY{l+s+si}{\PYZpc{}f}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{n}{clf\PYZus{}199}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{X\PYZus{}test\PYZus{}trans}\PY{p}{,} \PY{n}{y\PYZus{}test}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Training 10 hidden layer set score: 0.948978
+Test 10 hidden set score: 0.897857
+Training 50 hidden layer set score: 0.998903
+Test 50 hidden set score: 0.928749
+Training 100 hidden layer set score: 0.999863
+Test 100 hidden set score: 0.934728
+Training 150 hidden layer set score: 0.999863
+Test 150 hidden set score: 0.941704
+Training 199 hidden layer set score: 0.999863
+Test 199 hidden set score: 0.940209
+
+    \end{Verbatim}
+
+    \textbf{Analysis:} The accuracy when using 1 hidden layer of 10 nodes
+was fairly accurate. As the number of the hidden nodes increased to 50,
+100, and 150, there was a growth in accuracy. However, this growth slows
+and sometimes decreases as we approach the max number of nodes, 199.
+
+    Now that we've trained on the training set, we can predict labels for
+the test set.
+
+    \paragraph{Predict Labels for New
+Data}\label{predict-labels-for-new-data}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}24}]:} \PY{n}{test\PYZus{}predictions\PYZus{}10} \PY{o}{=} \PY{n}{clf\PYZus{}10}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X\PYZus{}test\PYZus{}trans}\PY{p}{)}
+         \PY{n}{test\PYZus{}predictions\PYZus{}50} \PY{o}{=} \PY{n}{clf\PYZus{}50}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X\PYZus{}test\PYZus{}trans}\PY{p}{)}
+         \PY{n}{test\PYZus{}predictions\PYZus{}100} \PY{o}{=} \PY{n}{clf\PYZus{}100}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X\PYZus{}test\PYZus{}trans}\PY{p}{)}
+         \PY{n}{test\PYZus{}predictions\PYZus{}150} \PY{o}{=} \PY{n}{clf\PYZus{}150}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X\PYZus{}test\PYZus{}trans}\PY{p}{)}
+         \PY{n}{test\PYZus{}predictions\PYZus{}199} \PY{o}{=} \PY{n}{clf\PYZus{}199}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X\PYZus{}test\PYZus{}trans}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}25}]:} \PY{n}{cm\PYZus{}10} \PY{o}{=} \PY{n}{confusion\PYZus{}matrix}\PY{p}{(}\PY{n}{y\PYZus{}test}\PY{p}{,} \PY{n}{test\PYZus{}predictions\PYZus{}10}\PY{p}{)}
+         \PY{n}{cm\PYZus{}50} \PY{o}{=} \PY{n}{confusion\PYZus{}matrix}\PY{p}{(}\PY{n}{y\PYZus{}test}\PY{p}{,} \PY{n}{test\PYZus{}predictions\PYZus{}50}\PY{p}{)}
+         \PY{n}{cm\PYZus{}100} \PY{o}{=} \PY{n}{confusion\PYZus{}matrix}\PY{p}{(}\PY{n}{y\PYZus{}test}\PY{p}{,} \PY{n}{test\PYZus{}predictions\PYZus{}100}\PY{p}{)}
+         \PY{n}{cm\PYZus{}150} \PY{o}{=} \PY{n}{confusion\PYZus{}matrix}\PY{p}{(}\PY{n}{y\PYZus{}test}\PY{p}{,} \PY{n}{test\PYZus{}predictions\PYZus{}150}\PY{p}{)}
+         \PY{n}{cm\PYZus{}199} \PY{o}{=} \PY{n}{confusion\PYZus{}matrix}\PY{p}{(}\PY{n}{y\PYZus{}test}\PY{p}{,} \PY{n}{test\PYZus{}predictions\PYZus{}199}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}28}]:} \PY{n}{class\PYZus{}names} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{,} \PY{l+m+mi}{6}\PY{p}{,} \PY{l+m+mi}{7}\PY{p}{,} \PY{l+m+mi}{8}\PY{p}{,} \PY{l+m+mi}{9}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}35}]:} \PY{n}{plot\PYZus{}confusion\PYZus{}matrix}\PY{p}{(}\PY{n}{cm\PYZus{}10}\PY{p}{,} \PY{n}{classes}\PY{o}{=}\PY{n}{class\PYZus{}names}\PY{p}{,} \PY{n}{title}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Confusion matrix of 1 hidden layer \PYZam{} 10 nodes, w/o normalization}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Confusion matrix, without normalization
+[[348   0   0   2   3   2   2   0   1   1]
+ [  0 248   1   0   7   0   4   2   0   2]
+ [  4   0 170   8   5   2   3   2   4   0]
+ [  2   0   6 143   1  10   0   1   2   1]
+ [  2   1   7   1 179   1   4   0   1   4]
+ [  2   0   0  13   1 141   0   0   1   2]
+ [  9   0   3   0   5   1 151   0   1   0]
+ [  0   0   2   1   9   0   0 130   1   4]
+ [  2   1   6   7   3   4   2   4 131   6]
+ [  0   2   0   1   7   0   0   4   2 161]]
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_38_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}39}]:} \PY{n}{plot\PYZus{}confusion\PYZus{}matrix}\PY{p}{(}\PY{n}{cm\PYZus{}199}\PY{p}{,} \PY{n}{classes}\PY{o}{=}\PY{n}{class\PYZus{}names}\PY{p}{,} \PY{n}{title}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Confusion matrix of 1 hidden layer \PYZam{} 199 nodes, w/o normalization}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Confusion matrix, without normalization
+[[350   0   2   0   2   1   3   0   0   1]
+ [  0 256   0   0   5   0   3   0   0   0]
+ [  3   1 181   2   2   2   1   1   5   0]
+ [  1   0   2 149   0  11   0   1   2   0]
+ [  0   1   4   0 187   2   1   1   0   4]
+ [  2   0   0   5   1 147   0   0   3   2]
+ [  0   0   2   0   3   3 162   0   0   0]
+ [  1   1   1   1   4   0   0 136   1   2]
+ [  0   0   2   4   0   3   1   1 152   3]
+ [  0   1   0   3   3   0   0   3   0 167]]
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_39_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsection{Train a 3 Hidden Layer Neural
+Net}\label{train-a-3-hidden-layer-neural-net}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}40}]:} \PY{c+c1}{\PYZsh{} initialize classifier objects}
+         \PY{n}{clf\PYZus{}3\PYZus{}10} \PY{o}{=} \PY{n}{MLPClassifier}\PY{p}{(}\PY{n}{hidden\PYZus{}layer\PYZus{}sizes}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{)}
+         \PY{n}{clf\PYZus{}3\PYZus{}50} \PY{o}{=} \PY{n}{MLPClassifier}\PY{p}{(}\PY{n}{hidden\PYZus{}layer\PYZus{}sizes}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{50}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{)}
+         \PY{n}{clf\PYZus{}3\PYZus{}100} \PY{o}{=} \PY{n}{MLPClassifier}\PY{p}{(}\PY{n}{hidden\PYZus{}layer\PYZus{}sizes}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{100}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{)}
+         \PY{n}{clf\PYZus{}3\PYZus{}150} \PY{o}{=} \PY{n}{MLPClassifier}\PY{p}{(}\PY{n}{hidden\PYZus{}layer\PYZus{}sizes}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{150}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{)}
+         \PY{n}{clf\PYZus{}3\PYZus{}199} \PY{o}{=} \PY{n}{MLPClassifier}\PY{p}{(}\PY{n}{hidden\PYZus{}layer\PYZus{}sizes}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{200}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} fit the classifier model to the data matrix X and is targets y}
+         \PY{n}{clf\PYZus{}3\PYZus{}10}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train\PYZus{}trans}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{)}
+         \PY{n}{clf\PYZus{}3\PYZus{}50}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train\PYZus{}trans}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{)}
+         \PY{n}{clf\PYZus{}3\PYZus{}100}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train\PYZus{}trans}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{)}
+         \PY{n}{clf\PYZus{}3\PYZus{}150}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train\PYZus{}trans}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{)}
+         \PY{n}{clf\PYZus{}3\PYZus{}199}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train\PYZus{}trans}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}40}]:} MLPClassifier(activation='relu', alpha=0.0001, batch\_size='auto', beta\_1=0.9,
+                beta\_2=0.999, early\_stopping=False, epsilon=1e-08,
+                hidden\_layer\_sizes=(200, 3), learning\_rate='constant',
+                learning\_rate\_init=0.001, max\_iter=200, momentum=0.9,
+                nesterovs\_momentum=True, power\_t=0.5, random\_state=None,
+                shuffle=True, solver='adam', tol=0.0001, validation\_fraction=0.1,
+                verbose=False, warm\_start=False)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}41}]:} \PY{k}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Training 3 hidden layer \PYZam{} 10 node set score: }\PY{l+s+si}{\PYZpc{}f}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{n}{clf\PYZus{}3\PYZus{}10}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{X\PYZus{}train\PYZus{}trans}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{)}\PY{p}{)}
+         \PY{k}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Test 3 hidden layer \PYZam{} 10 node set score: }\PY{l+s+si}{\PYZpc{}f}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{n}{clf\PYZus{}3\PYZus{}10}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{X\PYZus{}test\PYZus{}trans}\PY{p}{,} \PY{n}{y\PYZus{}test}\PY{p}{)}\PY{p}{)}
+         
+         \PY{k}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Training 3 hidden layer \PYZam{} 50 node set score: }\PY{l+s+si}{\PYZpc{}f}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{n}{clf\PYZus{}3\PYZus{}50}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{X\PYZus{}train\PYZus{}trans}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{)}\PY{p}{)}
+         \PY{k}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Test 3 hidden layer \PYZam{} 50 node set score: }\PY{l+s+si}{\PYZpc{}f}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{n}{clf\PYZus{}3\PYZus{}50}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{X\PYZus{}test\PYZus{}trans}\PY{p}{,} \PY{n}{y\PYZus{}test}\PY{p}{)}\PY{p}{)}
+         
+         \PY{k}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Training 3 hidden layer \PYZam{} 100 node layer set score: }\PY{l+s+si}{\PYZpc{}f}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{n}{clf\PYZus{}3\PYZus{}100}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{X\PYZus{}train\PYZus{}trans}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{)}\PY{p}{)}
+         \PY{k}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Test 3 hidden layer \PYZam{} 100 node set score: }\PY{l+s+si}{\PYZpc{}f}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{n}{clf\PYZus{}3\PYZus{}100}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{X\PYZus{}test\PYZus{}trans}\PY{p}{,} \PY{n}{y\PYZus{}test}\PY{p}{)}\PY{p}{)}
+         
+         \PY{k}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Training 3 hidden layer \PYZam{} 150 node layer set score: }\PY{l+s+si}{\PYZpc{}f}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{n}{clf\PYZus{}3\PYZus{}150}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{X\PYZus{}train\PYZus{}trans}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{)}\PY{p}{)}
+         \PY{k}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Test 3 hidden layer \PYZam{} 150 node set score: }\PY{l+s+si}{\PYZpc{}f}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{n}{clf\PYZus{}3\PYZus{}150}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{X\PYZus{}test\PYZus{}trans}\PY{p}{,} \PY{n}{y\PYZus{}test}\PY{p}{)}\PY{p}{)}
+         
+         \PY{k}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Training 3 hidden layer \PYZam{} 199 node layer set score: }\PY{l+s+si}{\PYZpc{}f}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{n}{clf\PYZus{}3\PYZus{}199}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{X\PYZus{}train\PYZus{}trans}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{)}\PY{p}{)}
+         \PY{k}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Test 3 hidden layer \PYZam{} 199 node set score: }\PY{l+s+si}{\PYZpc{}f}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{n}{clf\PYZus{}3\PYZus{}199}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{X\PYZus{}test\PYZus{}trans}\PY{p}{,} \PY{n}{y\PYZus{}test}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Training 3 hidden layer \& 10 node set score: 0.905774
+Test 3 hidden layer \& 10 node set score: 0.858994
+Training 3 hidden layer \& 50 node set score: 0.970374
+Test 3 hidden layer \& 50 node set score: 0.892377
+Training 3 hidden layer \& 100 node layer set score: 0.985599
+Test 3 hidden layer \& 100 node set score: 0.895864
+Training 3 hidden layer \& 150 node layer set score: 0.995474
+Test 3 hidden layer \& 150 node set score: 0.904833
+Training 3 hidden layer \& 199 node layer set score: 0.997668
+Test 3 hidden layer \& 199 node set score: 0.914300
+
+    \end{Verbatim}
+
+    \textbf{Analysis:} Increasing the number of layers for the same number
+of nodes decresed the accuracy of prediction. A 3 hidden layers, 10 node
+model was several 3-4\% less accurate than the 1 hidden layer, 10 node
+model and this pattern persisted as the number of nodes increased.
+Moreover, the 3 layer, 199 node model did not perform better than the 1
+hidden layer, 50 node model.
+
+    \paragraph{Predict Labels for New
+Data}\label{predict-labels-for-new-data}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}42}]:} \PY{n}{test\PYZus{}predictions\PYZus{}3\PYZus{}10} \PY{o}{=} \PY{n}{clf\PYZus{}3\PYZus{}10}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X\PYZus{}test\PYZus{}trans}\PY{p}{)}
+         \PY{n}{test\PYZus{}predictions\PYZus{}3\PYZus{}50} \PY{o}{=} \PY{n}{clf\PYZus{}3\PYZus{}50}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X\PYZus{}test\PYZus{}trans}\PY{p}{)}
+         \PY{n}{test\PYZus{}predictions\PYZus{}3\PYZus{}100} \PY{o}{=} \PY{n}{clf\PYZus{}3\PYZus{}100}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X\PYZus{}test\PYZus{}trans}\PY{p}{)}
+         \PY{n}{test\PYZus{}predictions\PYZus{}3\PYZus{}150} \PY{o}{=} \PY{n}{clf\PYZus{}3\PYZus{}150}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X\PYZus{}test\PYZus{}trans}\PY{p}{)}
+         \PY{n}{test\PYZus{}predictions\PYZus{}3\PYZus{}199} \PY{o}{=} \PY{n}{clf\PYZus{}3\PYZus{}199}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X\PYZus{}test\PYZus{}trans}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}45}]:} \PY{n}{cm\PYZus{}3\PYZus{}10} \PY{o}{=} \PY{n}{confusion\PYZus{}matrix}\PY{p}{(}\PY{n}{y\PYZus{}test}\PY{p}{,} \PY{n}{test\PYZus{}predictions\PYZus{}3\PYZus{}10}\PY{p}{)}
+         \PY{n}{cm\PYZus{}3\PYZus{}50} \PY{o}{=} \PY{n}{confusion\PYZus{}matrix}\PY{p}{(}\PY{n}{y\PYZus{}test}\PY{p}{,} \PY{n}{test\PYZus{}predictions\PYZus{}3\PYZus{}50}\PY{p}{)}
+         \PY{n}{cm\PYZus{}3\PYZus{}100} \PY{o}{=} \PY{n}{confusion\PYZus{}matrix}\PY{p}{(}\PY{n}{y\PYZus{}test}\PY{p}{,} \PY{n}{test\PYZus{}predictions\PYZus{}3\PYZus{}100}\PY{p}{)}
+         \PY{n}{cm\PYZus{}3\PYZus{}150} \PY{o}{=} \PY{n}{confusion\PYZus{}matrix}\PY{p}{(}\PY{n}{y\PYZus{}test}\PY{p}{,} \PY{n}{test\PYZus{}predictions\PYZus{}3\PYZus{}150}\PY{p}{)}
+         \PY{n}{cm\PYZus{}3\PYZus{}199} \PY{o}{=} \PY{n}{confusion\PYZus{}matrix}\PY{p}{(}\PY{n}{y\PYZus{}test}\PY{p}{,} \PY{n}{test\PYZus{}predictions\PYZus{}3\PYZus{}199}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}46}]:} \PY{n}{plot\PYZus{}confusion\PYZus{}matrix}\PY{p}{(}\PY{n}{cm\PYZus{}3\PYZus{}10}\PY{p}{,} \PY{n}{classes}\PY{o}{=}\PY{n}{class\PYZus{}names}\PY{p}{,} \PY{n}{title}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Confusion matrix of 3 hidden layers \PYZam{} 10 nodes, w/o normalization}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Confusion matrix, without normalization
+[[344   1   0   1   2   2   2   1   4   2]
+ [  0 246   0   0   2   3   5   1   0   7]
+ [  2   0 153   5   8   2   4   6  16   2]
+ [  3   0   1 141   1  12   0   0   6   2]
+ [  0   1   7   0 163   3   5   0   1  20]
+ [  3   0   2  15   5 125   0   0   6   4]
+ [  8   0   4   0   4   1 143   0   2   8]
+ [  1   1   1   0   0   2   3 131   1   7]
+ [  5   0   9   9   2   6   0   1 127   7]
+ [  1   2   0   0  11   1   4   3   4 151]]
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_47_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}47}]:} \PY{n}{plot\PYZus{}confusion\PYZus{}matrix}\PY{p}{(}\PY{n}{cm\PYZus{}3\PYZus{}199}\PY{p}{,} \PY{n}{classes}\PY{o}{=}\PY{n}{class\PYZus{}names}\PY{p}{,} \PY{n}{title}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Confusion matrix of 3 hidden layers \PYZam{} 199 nodes, w/o normalization}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Confusion matrix, without normalization
+[[345   0   3   4   1   1   3   2   0   0]
+ [  0 252   1   0   0   2   4   5   0   0]
+ [  4   0 176   9   1   3   5   0   0   0]
+ [  2   0   4 141   0  11   0   0   7   1]
+ [  1   2   5   0 184   0   2   0   0   6]
+ [  1   0   1   9   0 145   0   0   2   2]
+ [  1   0   5   1   2   2 158   1   0   0]
+ [  0   2   3   0   4   0   0 136   0   2]
+ [  1   8   4   6   0  11   0   0 134   2]
+ [  0   0   1   1   8   1   1   1   0 164]]
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_48_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsection{Train a 5 Hidden Layer Neural
+Net}\label{train-a-5-hidden-layer-neural-net}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}48}]:} \PY{c+c1}{\PYZsh{} initialize classifier objects}
+         \PY{n}{clf\PYZus{}5\PYZus{}10} \PY{o}{=} \PY{n}{MLPClassifier}\PY{p}{(}\PY{n}{hidden\PYZus{}layer\PYZus{}sizes}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{)}
+         \PY{n}{clf\PYZus{}5\PYZus{}50} \PY{o}{=} \PY{n}{MLPClassifier}\PY{p}{(}\PY{n}{hidden\PYZus{}layer\PYZus{}sizes}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{50}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{)}
+         \PY{n}{clf\PYZus{}5\PYZus{}100} \PY{o}{=} \PY{n}{MLPClassifier}\PY{p}{(}\PY{n}{hidden\PYZus{}layer\PYZus{}sizes}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{100}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{)}
+         \PY{n}{clf\PYZus{}5\PYZus{}150} \PY{o}{=} \PY{n}{MLPClassifier}\PY{p}{(}\PY{n}{hidden\PYZus{}layer\PYZus{}sizes}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{150}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{)}
+         \PY{n}{clf\PYZus{}5\PYZus{}199} \PY{o}{=} \PY{n}{MLPClassifier}\PY{p}{(}\PY{n}{hidden\PYZus{}layer\PYZus{}sizes}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{200}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} fit the classifier model to the data matrix X and is targets y}
+         \PY{n}{clf\PYZus{}5\PYZus{}10}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train\PYZus{}trans}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{)}
+         \PY{n}{clf\PYZus{}5\PYZus{}50}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train\PYZus{}trans}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{)}
+         \PY{n}{clf\PYZus{}5\PYZus{}100}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train\PYZus{}trans}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{)}
+         \PY{n}{clf\PYZus{}5\PYZus{}150}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train\PYZus{}trans}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{)}
+         \PY{n}{clf\PYZus{}5\PYZus{}199}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train\PYZus{}trans}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}48}]:} MLPClassifier(activation='relu', alpha=0.0001, batch\_size='auto', beta\_1=0.9,
+                beta\_2=0.999, early\_stopping=False, epsilon=1e-08,
+                hidden\_layer\_sizes=(200, 5), learning\_rate='constant',
+                learning\_rate\_init=0.001, max\_iter=200, momentum=0.9,
+                nesterovs\_momentum=True, power\_t=0.5, random\_state=None,
+                shuffle=True, solver='adam', tol=0.0001, validation\_fraction=0.1,
+                verbose=False, warm\_start=False)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}49}]:} \PY{k}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Training 5 hidden layer \PYZam{} 10 node set score: }\PY{l+s+si}{\PYZpc{}f}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{n}{clf\PYZus{}5\PYZus{}10}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{X\PYZus{}train\PYZus{}trans}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{)}\PY{p}{)}
+         \PY{k}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Test 5 hidden layer \PYZam{} 10 node set score: }\PY{l+s+si}{\PYZpc{}f}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{n}{clf\PYZus{}5\PYZus{}10}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{X\PYZus{}test\PYZus{}trans}\PY{p}{,} \PY{n}{y\PYZus{}test}\PY{p}{)}\PY{p}{)}
+         
+         \PY{k}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Training 5 hidden layer \PYZam{} 50 node set score: }\PY{l+s+si}{\PYZpc{}f}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{n}{clf\PYZus{}5\PYZus{}50}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{X\PYZus{}train\PYZus{}trans}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{)}\PY{p}{)}
+         \PY{k}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Test 5 hidden layer \PYZam{} 50 node set score: }\PY{l+s+si}{\PYZpc{}f}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{n}{clf\PYZus{}5\PYZus{}50}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{X\PYZus{}test\PYZus{}trans}\PY{p}{,} \PY{n}{y\PYZus{}test}\PY{p}{)}\PY{p}{)}
+         
+         \PY{k}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Training 5 hidden layer \PYZam{} 100 node layer set score: }\PY{l+s+si}{\PYZpc{}f}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{n}{clf\PYZus{}5\PYZus{}100}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{X\PYZus{}train\PYZus{}trans}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{)}\PY{p}{)}
+         \PY{k}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Test 5 hidden layer \PYZam{} 100 node set score: }\PY{l+s+si}{\PYZpc{}f}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{n}{clf\PYZus{}5\PYZus{}100}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{X\PYZus{}test\PYZus{}trans}\PY{p}{,} \PY{n}{y\PYZus{}test}\PY{p}{)}\PY{p}{)}
+         
+         \PY{k}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Training 5 hidden layer \PYZam{} 150 node layer set score: }\PY{l+s+si}{\PYZpc{}f}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{n}{clf\PYZus{}5\PYZus{}150}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{X\PYZus{}train\PYZus{}trans}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{)}\PY{p}{)}
+         \PY{k}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Test 5 hidden layer \PYZam{} 150 node set score: }\PY{l+s+si}{\PYZpc{}f}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{n}{clf\PYZus{}5\PYZus{}150}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{X\PYZus{}test\PYZus{}trans}\PY{p}{,} \PY{n}{y\PYZus{}test}\PY{p}{)}\PY{p}{)}
+         
+         \PY{k}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Training 5 hidden layer \PYZam{} 199 node layer set score: }\PY{l+s+si}{\PYZpc{}f}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{n}{clf\PYZus{}5\PYZus{}199}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{X\PYZus{}train\PYZus{}trans}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{)}\PY{p}{)}
+         \PY{k}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Test 5 hidden layer \PYZam{} 199 node set score: }\PY{l+s+si}{\PYZpc{}f}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{n}{clf\PYZus{}5\PYZus{}199}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{X\PYZus{}test\PYZus{}trans}\PY{p}{,} \PY{n}{y\PYZus{}test}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Training 5 hidden layer \& 10 node set score: 0.937320
+Test 5 hidden layer \& 10 node set score: 0.889387
+Training 5 hidden layer \& 50 node set score: 0.994788
+Test 5 hidden layer \& 50 node set score: 0.915296
+Training 5 hidden layer \& 100 node layer set score: 0.998628
+Test 5 hidden layer \& 100 node set score: 0.920777
+Training 5 hidden layer \& 150 node layer set score: 0.999314
+Test  hidden layer \& 150 node set score: 0.920777
+Training 5 hidden layer \& 199 node layer set score: 0.998766
+Test 5 hidden layer \& 199 node set score: 0.913802
+
+    \end{Verbatim}
+
+    \textbf{Analysis:} The 5 hidden layer models perform slightly better
+thatn the 3 layer models, however, overall they are not performing
+better than the 1 layer implementation.
+
+    \paragraph{Predict Labels for New
+Data}\label{predict-labels-for-new-data}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}51}]:} \PY{n}{test\PYZus{}predictions\PYZus{}5\PYZus{}10} \PY{o}{=} \PY{n}{clf\PYZus{}5\PYZus{}10}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X\PYZus{}test\PYZus{}trans}\PY{p}{)}
+         \PY{n}{test\PYZus{}predictions\PYZus{}5\PYZus{}50} \PY{o}{=} \PY{n}{clf\PYZus{}5\PYZus{}50}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X\PYZus{}test\PYZus{}trans}\PY{p}{)}
+         \PY{n}{test\PYZus{}predictions\PYZus{}5\PYZus{}100} \PY{o}{=} \PY{n}{clf\PYZus{}5\PYZus{}100}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X\PYZus{}test\PYZus{}trans}\PY{p}{)}
+         \PY{n}{test\PYZus{}predictions\PYZus{}5\PYZus{}150} \PY{o}{=} \PY{n}{clf\PYZus{}5\PYZus{}150}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X\PYZus{}test\PYZus{}trans}\PY{p}{)}
+         \PY{n}{test\PYZus{}predictions\PYZus{}5\PYZus{}199} \PY{o}{=} \PY{n}{clf\PYZus{}5\PYZus{}199}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X\PYZus{}test\PYZus{}trans}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}52}]:} \PY{n}{cm\PYZus{}5\PYZus{}10} \PY{o}{=} \PY{n}{confusion\PYZus{}matrix}\PY{p}{(}\PY{n}{y\PYZus{}test}\PY{p}{,} \PY{n}{test\PYZus{}predictions\PYZus{}5\PYZus{}10}\PY{p}{)}
+         \PY{n}{cm\PYZus{}5\PYZus{}50} \PY{o}{=} \PY{n}{confusion\PYZus{}matrix}\PY{p}{(}\PY{n}{y\PYZus{}test}\PY{p}{,} \PY{n}{test\PYZus{}predictions\PYZus{}5\PYZus{}50}\PY{p}{)}
+         \PY{n}{cm\PYZus{}5\PYZus{}100} \PY{o}{=} \PY{n}{confusion\PYZus{}matrix}\PY{p}{(}\PY{n}{y\PYZus{}test}\PY{p}{,} \PY{n}{test\PYZus{}predictions\PYZus{}5\PYZus{}100}\PY{p}{)}
+         \PY{n}{cm\PYZus{}5\PYZus{}150} \PY{o}{=} \PY{n}{confusion\PYZus{}matrix}\PY{p}{(}\PY{n}{y\PYZus{}test}\PY{p}{,} \PY{n}{test\PYZus{}predictions\PYZus{}5\PYZus{}150}\PY{p}{)}
+         \PY{n}{cm\PYZus{}5\PYZus{}199} \PY{o}{=} \PY{n}{confusion\PYZus{}matrix}\PY{p}{(}\PY{n}{y\PYZus{}test}\PY{p}{,} \PY{n}{test\PYZus{}predictions\PYZus{}5\PYZus{}199}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}53}]:} \PY{n}{plot\PYZus{}confusion\PYZus{}matrix}\PY{p}{(}\PY{n}{cm\PYZus{}5\PYZus{}10}\PY{p}{,} \PY{n}{classes}\PY{o}{=}\PY{n}{class\PYZus{}names}\PY{p}{,} \PY{n}{title}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Confusion matrix of 5 hidden layers \PYZam{} 10 nodes, w/o normalization}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Confusion matrix, without normalization
+[[341   0   0   2   2   3   3   0   7   1]
+ [  0 247   2   0   1   1   4   5   2   2]
+ [  6   1 167   3   5   4   2   0  10   0]
+ [  1   0   3 141   0  15   0   2   4   0]
+ [  0   1   5   0 178   5   3   1   1   6]
+ [  6   0   2   8   2 136   2   0   3   1]
+ [  3   0   5   0   4   2 153   0   2   1]
+ [  2   0   1   2   4   0   0 133   1   4]
+ [  1   0  10   6   4   2   2   2 130   9]
+ [  0   0   0   1   3   0   0  11   3 159]]
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_56_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}54}]:} \PY{n}{plot\PYZus{}confusion\PYZus{}matrix}\PY{p}{(}\PY{n}{cm\PYZus{}5\PYZus{}199}\PY{p}{,} \PY{n}{classes}\PY{o}{=}\PY{n}{class\PYZus{}names}\PY{p}{,} \PY{n}{title}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Confusion matrix of 5 hidden layers \PYZam{} 199 nodes, w/o normalization}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Confusion matrix, without normalization
+[[347   0   1   0   3   2   2   1   2   1]
+ [  1 252   1   2   2   1   2   0   2   1]
+ [  4   0 175   5   2   1   0   1   7   3]
+ [  1   1   3 146   2  10   0   2   1   0]
+ [  2   1   6   0 176   2   2   0   5   6]
+ [  3   2   0   6   1 145   0   0   2   1]
+ [  3   0   2   0   2   1 158   0   4   0]
+ [  0   2   1   3   3   0   0 133   1   4]
+ [  1   0   3   4   3   4   4   2 141   4]
+ [  0   2   0   5   2   0   0   2   5 161]]
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_57_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsection{Train a 10 Hidden Layer Neural
+Net}\label{train-a-10-hidden-layer-neural-net}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}55}]:} \PY{c+c1}{\PYZsh{} initialize classifier objects}
+         \PY{n}{clf\PYZus{}10\PYZus{}10} \PY{o}{=} \PY{n}{MLPClassifier}\PY{p}{(}\PY{n}{hidden\PYZus{}layer\PYZus{}sizes}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{)}
+         \PY{n}{clf\PYZus{}10\PYZus{}50} \PY{o}{=} \PY{n}{MLPClassifier}\PY{p}{(}\PY{n}{hidden\PYZus{}layer\PYZus{}sizes}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{50}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{)}
+         \PY{n}{clf\PYZus{}10\PYZus{}100} \PY{o}{=} \PY{n}{MLPClassifier}\PY{p}{(}\PY{n}{hidden\PYZus{}layer\PYZus{}sizes}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{100}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{)}
+         \PY{n}{clf\PYZus{}10\PYZus{}150} \PY{o}{=} \PY{n}{MLPClassifier}\PY{p}{(}\PY{n}{hidden\PYZus{}layer\PYZus{}sizes}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{150}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{)}
+         \PY{n}{clf\PYZus{}10\PYZus{}199} \PY{o}{=} \PY{n}{MLPClassifier}\PY{p}{(}\PY{n}{hidden\PYZus{}layer\PYZus{}sizes}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{200}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} fit the classifier model to the data matrix X and is targets y}
+         \PY{n}{clf\PYZus{}10\PYZus{}10}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train\PYZus{}trans}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{)}
+         \PY{n}{clf\PYZus{}10\PYZus{}50}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train\PYZus{}trans}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{)}
+         \PY{n}{clf\PYZus{}10\PYZus{}100}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train\PYZus{}trans}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{)}
+         \PY{n}{clf\PYZus{}10\PYZus{}150}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train\PYZus{}trans}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{)}
+         \PY{n}{clf\PYZus{}10\PYZus{}199}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train\PYZus{}trans}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}55}]:} MLPClassifier(activation='relu', alpha=0.0001, batch\_size='auto', beta\_1=0.9,
+                beta\_2=0.999, early\_stopping=False, epsilon=1e-08,
+                hidden\_layer\_sizes=(200, 10), learning\_rate='constant',
+                learning\_rate\_init=0.001, max\_iter=200, momentum=0.9,
+                nesterovs\_momentum=True, power\_t=0.5, random\_state=None,
+                shuffle=True, solver='adam', tol=0.0001, validation\_fraction=0.1,
+                verbose=False, warm\_start=False)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}56}]:} \PY{k}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Training 10 hidden layer \PYZam{} 10 node set score: }\PY{l+s+si}{\PYZpc{}f}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{n}{clf\PYZus{}10\PYZus{}10}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{X\PYZus{}train\PYZus{}trans}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{)}\PY{p}{)}
+         \PY{k}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Test 10 hidden layer \PYZam{} 10 node set score: }\PY{l+s+si}{\PYZpc{}f}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{n}{clf\PYZus{}10\PYZus{}10}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{X\PYZus{}test\PYZus{}trans}\PY{p}{,} \PY{n}{y\PYZus{}test}\PY{p}{)}\PY{p}{)}
+         
+         \PY{k}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Training 10 hidden layer \PYZam{} 50 node set score: }\PY{l+s+si}{\PYZpc{}f}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{n}{clf\PYZus{}10\PYZus{}50}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{X\PYZus{}train\PYZus{}trans}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{)}\PY{p}{)}
+         \PY{k}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Test 10 hidden layer \PYZam{} 50 node set score: }\PY{l+s+si}{\PYZpc{}f}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{n}{clf\PYZus{}10\PYZus{}50}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{X\PYZus{}test\PYZus{}trans}\PY{p}{,} \PY{n}{y\PYZus{}test}\PY{p}{)}\PY{p}{)}
+         
+         \PY{k}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Training 10 hidden layer \PYZam{} 100 node layer set score: }\PY{l+s+si}{\PYZpc{}f}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{n}{clf\PYZus{}10\PYZus{}100}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{X\PYZus{}train\PYZus{}trans}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{)}\PY{p}{)}
+         \PY{k}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Test 10 hidden layer \PYZam{} 100 node set score: }\PY{l+s+si}{\PYZpc{}f}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{n}{clf\PYZus{}10\PYZus{}100}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{X\PYZus{}test\PYZus{}trans}\PY{p}{,} \PY{n}{y\PYZus{}test}\PY{p}{)}\PY{p}{)}
+         
+         \PY{k}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Training 10 hidden layer \PYZam{} 150 node layer set score: }\PY{l+s+si}{\PYZpc{}f}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{n}{clf\PYZus{}10\PYZus{}150}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{X\PYZus{}train\PYZus{}trans}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{)}\PY{p}{)}
+         \PY{k}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Test 10 hidden layer \PYZam{} 150 node set score: }\PY{l+s+si}{\PYZpc{}f}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{n}{clf\PYZus{}10\PYZus{}150}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{X\PYZus{}test\PYZus{}trans}\PY{p}{,} \PY{n}{y\PYZus{}test}\PY{p}{)}\PY{p}{)}
+         
+         \PY{k}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Training 10 hidden layer \PYZam{} 199 node layer set score: }\PY{l+s+si}{\PYZpc{}f}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{n}{clf\PYZus{}10\PYZus{}199}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{X\PYZus{}train\PYZus{}trans}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{)}\PY{p}{)}
+         \PY{k}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Test 10 hidden layer \PYZam{} 199 node set score: }\PY{l+s+si}{\PYZpc{}f}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{n}{clf\PYZus{}10\PYZus{}199}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{X\PYZus{}test\PYZus{}trans}\PY{p}{,} \PY{n}{y\PYZus{}test}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Training 5 hidden layer \& 10 node set score: 0.953367
+Test 5 hidden layer \& 10 node set score: 0.896861
+Training 5 hidden layer \& 50 node set score: 0.999863
+Test 5 hidden layer \& 50 node set score: 0.925760
+Training 5 hidden layer \& 100 node layer set score: 0.999863
+Test 5 hidden layer \& 100 node set score: 0.936721
+Training 5 hidden layer \& 150 node layer set score: 0.999863
+Test  hidden layer \& 150 node set score: 0.932735
+Training 5 hidden layer \& 199 node layer set score: 0.999863
+Test 5 hidden layer \& 199 node set score: 0.934230
+
+    \end{Verbatim}
+
+    \textbf{Analysis:} Using 10 hidden layers has gotten more comparable
+results to the 1 layer model across the different node dimensions.
+
+    \paragraph{Predict Labels for New
+Data}\label{predict-labels-for-new-data}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}57}]:} \PY{n}{test\PYZus{}predictions\PYZus{}10\PYZus{}10} \PY{o}{=} \PY{n}{clf\PYZus{}10\PYZus{}10}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X\PYZus{}test\PYZus{}trans}\PY{p}{)}
+         \PY{n}{test\PYZus{}predictions\PYZus{}10\PYZus{}50} \PY{o}{=} \PY{n}{clf\PYZus{}10\PYZus{}50}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X\PYZus{}test\PYZus{}trans}\PY{p}{)}
+         \PY{n}{test\PYZus{}predictions\PYZus{}10\PYZus{}100} \PY{o}{=} \PY{n}{clf\PYZus{}10\PYZus{}100}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X\PYZus{}test\PYZus{}trans}\PY{p}{)}
+         \PY{n}{test\PYZus{}predictions\PYZus{}10\PYZus{}150} \PY{o}{=} \PY{n}{clf\PYZus{}10\PYZus{}150}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X\PYZus{}test\PYZus{}trans}\PY{p}{)}
+         \PY{n}{test\PYZus{}predictions\PYZus{}10\PYZus{}199} \PY{o}{=} \PY{n}{clf\PYZus{}10\PYZus{}199}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X\PYZus{}test\PYZus{}trans}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}58}]:} \PY{n}{cm\PYZus{}10\PYZus{}10} \PY{o}{=} \PY{n}{confusion\PYZus{}matrix}\PY{p}{(}\PY{n}{y\PYZus{}test}\PY{p}{,} \PY{n}{test\PYZus{}predictions\PYZus{}10\PYZus{}10}\PY{p}{)}
+         \PY{n}{cm\PYZus{}10\PYZus{}50} \PY{o}{=} \PY{n}{confusion\PYZus{}matrix}\PY{p}{(}\PY{n}{y\PYZus{}test}\PY{p}{,} \PY{n}{test\PYZus{}predictions\PYZus{}10\PYZus{}50}\PY{p}{)}
+         \PY{n}{cm\PYZus{}10\PYZus{}100} \PY{o}{=} \PY{n}{confusion\PYZus{}matrix}\PY{p}{(}\PY{n}{y\PYZus{}test}\PY{p}{,} \PY{n}{test\PYZus{}predictions\PYZus{}10\PYZus{}100}\PY{p}{)}
+         \PY{n}{cm\PYZus{}10\PYZus{}150} \PY{o}{=} \PY{n}{confusion\PYZus{}matrix}\PY{p}{(}\PY{n}{y\PYZus{}test}\PY{p}{,} \PY{n}{test\PYZus{}predictions\PYZus{}10\PYZus{}150}\PY{p}{)}
+         \PY{n}{cm\PYZus{}10\PYZus{}199} \PY{o}{=} \PY{n}{confusion\PYZus{}matrix}\PY{p}{(}\PY{n}{y\PYZus{}test}\PY{p}{,} \PY{n}{test\PYZus{}predictions\PYZus{}10\PYZus{}199}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}59}]:} \PY{n}{plot\PYZus{}confusion\PYZus{}matrix}\PY{p}{(}\PY{n}{cm\PYZus{}10\PYZus{}10}\PY{p}{,} \PY{n}{classes}\PY{o}{=}\PY{n}{class\PYZus{}names}\PY{p}{,} \PY{n}{title}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Confusion matrix of 10 hidden layers \PYZam{} 10 nodes, w/o normalization}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Confusion matrix, without normalization
+[[346   0   0   2   2   4   4   0   0   1]
+ [  0 249   3   1   1   1   3   2   1   3]
+ [  3   0 172   5   9   2   2   2   3   0]
+ [  2   0   4 143   0  12   0   1   3   1]
+ [  0   2   9   1 176   2   2   1   2   5]
+ [  6   0   0  11   1 135   0   1   5   1]
+ [  6   0   3   0   4   4 152   0   1   0]
+ [  0   0   1   2   4   2   0 129   2   7]
+ [  1   0   2   6   3   9   0   3 136   6]
+ [  0   0   0   1   7   0   0   5   2 162]]
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_65_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}60}]:} \PY{n}{plot\PYZus{}confusion\PYZus{}matrix}\PY{p}{(}\PY{n}{cm\PYZus{}10\PYZus{}199}\PY{p}{,} \PY{n}{classes}\PY{o}{=}\PY{n}{class\PYZus{}names}\PY{p}{,} \PY{n}{title}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Confusion matrix of 10 hidden layers \PYZam{} 199 nodes, w/o normalization}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Confusion matrix, without normalization
+[[348   0   2   0   2   3   3   0   0   1]
+ [  0 252   0   0   6   0   4   1   1   0]
+ [  4   0 179   1   3   2   1   1   7   0]
+ [  2   0   1 150   0   9   0   1   3   0]
+ [  0   1   3   0 186   2   2   0   1   5]
+ [  1   0   0   6   1 148   0   0   2   2]
+ [  1   0   3   0   3   1 162   0   0   0]
+ [  0   1   1   1   4   1   0 135   1   3]
+ [  0   0   2   3   1   3   1   1 149   6]
+ [  0   2   0   2   5   0   0   1   1 166]]
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_66_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
